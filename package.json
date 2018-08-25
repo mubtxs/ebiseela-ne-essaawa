@@ -4,25 +4,21 @@
   "description": "Ebiseela ne essaawa mu Luganda. Time of the day, days, months in Luganda (lg-ug)",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
-    "start": "gulp server"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/mubtxs/jQuery.ebiseela-ne-essaawa.git"
   },
   "keywords": [
-    "ediseela",
+    "ebiseela",
     "essaawa",
     "obudde",
+    "luganda",
     "date",
     "time",
-    "day",
-    "of",
-    "the",
     "week",
-    "months",
-    "luganda"
+    "month"
   ],
   "author": "mubtxs",
   "license": "MIT",
@@ -35,6 +31,7 @@
     "babel-preset-es2015": "^6.3.13",
     "babel-register": "^6.5.2",
     "bootstrap": "^4.1.3",
+    "browser-sync": "^2.24.6",
     "chai": "^4.1.2",
     "del": "^2.2.0",
     "eslint": "^5.4.0",
@@ -45,7 +42,6 @@
     "gulp-load-plugins": "^1.2.4",
     "gulp-plumber": "^1.0.1",
     "gulp-rename": "^1.4.0",
-    "gulp-size": "^2.1.0",
     "gulp-sourcemaps": "^2.2.0",
     "gulp-uglify": "^2.0.0",
     "jquery": "^3.3.1",

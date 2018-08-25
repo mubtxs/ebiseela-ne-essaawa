@@ -16,10 +16,17 @@ $.ebiseelaNeEssaawa = {};
 
 $.ebiseelaNeEssaawa.fn = {};
 
-$.fn.ebiseelaNeEssaawa = () => {
+/*$.fn.ebiseelaNeEssaawa = () => {
     var args, method;
     method = arguments[0];
     args = arguments.length >= 2 ? slice.call(arguments, 1) : [];
+    return $.ebiseelaNeEssaawa.fn[method].apply(this, args);
+};*/
+
+$.fn.ebiseelaNeEssaawa = (...x) => {
+    var args, method;
+    method = x[0];
+    args = x.length >= 2 ? slice.call(x, 1) : [];
     return $.ebiseelaNeEssaawa.fn[method].apply(this, args);
 };
 
@@ -174,7 +181,7 @@ const ENNAKU_ZA_OMWEZI = [
     'kkuminabbili',
     'kkuminassatu',
     'kkuminannya',
-    'kkuminataano',
+    'kkuminattaano',
     'kumminamukaaga',
     'kumminamusanvu',
     'kumminamunaana',
@@ -258,11 +265,13 @@ const EMBALA_EYA_OBUTIKITIKI = [
 const NNALUGANDA = {
     MU: 'mu',
     EZA: 'eza',
+    ZA: 'ez',
     EZ: 'ez', // ez'
     NE: 'ne',
     NA: 'na',
     N: 'n', // n'
     EYA: 'eya',
+    YA: 'ya',
     EY: 'ey', // ey'
     Y: 'y' // y'
 };
@@ -1374,7 +1383,8 @@ funaOlunakuOlukulu = (mwe = 0, lun = 0) => {
             return 'oluddilila sekukkulu';
 
         default:
-            throw new Error(`olunaku olukulu ${lun} mu mwezi ${mwe} tegumanyiddwa`);
+            //throw new Error(`olunaku olukulu ${lun} mu mwezi ${mwe} tegumanyiddwa`);
+            return '';
     }
 };
 
@@ -1444,7 +1454,7 @@ funaOmwakaMuBigambo = (omw = '0', emp = 'v') => {
             kkuminnal = kkumi == 0 ? '' : makumi == 1 ? NNALUGANDA.NA : NNALUGANDA.MU;
             kkumimu = kkumi == 0 ? '' : `${kkuminnal}${ENNYINGO_EZA_OMWAKA.eyokunna[kkumi-1]}`;
 
-            return `${ENNYINGO_EZA_OMWAKA.eyokusatu[makumi-1]}${kkuminnal}${kkumimu}`;
+            return `${ENNYINGO_EZA_OMWAKA.eyokusatu[makumi-1]}${kkumimu}`;
         } else {
             throw new Error(`emyaka ${omw} mitono nnyo okufunzibwa mu bigambo`);
         }
@@ -1781,7 +1791,7 @@ mpaEssaawaMuBigambo = (ess, end) => {
     let eddakiika, akatikitiki, sekonda, dakiika, katikit,
         essaawa = funaEssaawa(ess.essaawa, end.endsawa),
         ekigelo = end.endkige === '' ? '' : ` ${NNALUGANDA.EZA} ${funaEkigelo(ess.essaawa, end.endkige)}`,
-        sawa = end.endsawa === E_SAWA.b ? `essaawa ${end.endsawa === E_SAWA.b ? NNALUGANDA.EYA : NNALUGANDA.EZA} ` : 'essaawa ';
+        sawa = end.endsawa === E_SAWA.b ? `essaawa ${end.endsawa === E_SAWA.b ? NNALUGANDA.YA : NNALUGANDA.ZA} ` : 'essaawa ';
 
     if (end.endbuwa === 'sss') {
         if (end.eddakiika == 30) {

@@ -472,6 +472,24 @@
             });
         });
 
+        describe('gezesa akakolelo \'omwaka\'', function () {
+            it('nnina okufuna omwaka mu endabika entuufu', function () {
+                var ebyokwelobozesaako = {},
+                    omwaka = 2015;
+
+                ebyokwelobozesaako.endabika = 'm';
+                expect($.ebiseelaNeEssaawa.omwaka(omwaka, ebyokwelobozesaako)).to.be.equal('2015');
+
+                ebyokwelobozesaako.endabika = 'ms';
+                expect($.ebiseelaNeEssaawa.omwaka(omwaka, ebyokwelobozesaako)).to.be.equal('15');
+
+                ebyokwelobozesaako.endabika = 'b';
+                expect($.ebiseelaNeEssaawa.omwaka(omwaka, ebyokwelobozesaako)).to.be.equal('nkumibbili kkuminattaano');
+
+                ebyokwelobozesaako.endabika = 'bs';
+                expect($.ebiseelaNeEssaawa.omwaka(omwaka, ebyokwelobozesaako)).to.be.equal('kkuminattaano');
+            });
+        });
     });
 
     describe('Okugezesa ebya essaawa', function () {
@@ -688,7 +706,7 @@
                     essaawa: essaawa,
                     eddakiika: eddakiika,
                     akatikitiki: akatikitiki
-                }, ebyokwelobozesaako)).to.be.equal('essaawa eya matutuma ne eddakiika musanvu ne obutikitiki kkuminakamu');
+                }, ebyokwelobozesaako)).to.be.equal('essaawa ya matutuma ne eddakiika musanvu ne obutikitiki kkuminakamu');
                 ebyokwelobozesaako = {};
 
                 ebyokwelobozesaako.endabika = 'cbs';
@@ -697,7 +715,7 @@
                     essaawa: essaawa,
                     eddakiika: eddakiika,
                     akatikitiki: akatikitiki
-                }, ebyokwelobozesaako)).to.be.equal('essaawa eya maliili ne eddakiika musanvu');
+                }, ebyokwelobozesaako)).to.be.equal('essaawa ya maliili ne eddakiika musanvu');
                 ebyokwelobozesaako = {};
 
                 ebyokwelobozesaako.endabika = 'cbss';
@@ -706,7 +724,7 @@
                     essaawa: essaawa,
                     eddakiika: eddakiika,
                     akatikitiki: akatikitiki
-                }, ebyokwelobozesaako)).to.be.equal('essaawa eya nkokeeyookubili');
+                }, ebyokwelobozesaako)).to.be.equal('essaawa ya nkokeeyookubili');
                 ebyokwelobozesaako = {};
             });
         });
@@ -755,7 +773,20 @@
     describe('Okugezesa ebya ekigelo', function () {
         describe('gezesa akakolelo \'ekigelo\'', function () {
             it('nnina okufuna ekigelo mu endabika entuufu', function () {
-                // okugezesa kulekeddwa kubanga akakolelo 'kati' kalina enkola yemu ne akakolelo 'meka' wansi-wano akagezeseddwa okujako nti kafuna essaawa kati-kati
+                var ebyokwelobozesaako = {},
+                    essaawa = 5;
+
+                ebyokwelobozesaako.endabika = 'k';
+                expect($.ebiseelaNeEssaawa.ekigelo(essaawa, ebyokwelobozesaako)).to.be.equal('amatulutulu');
+                ebyokwelobozesaako = {};
+
+                ebyokwelobozesaako.endabika = 'n';
+                expect($.ebiseelaNeEssaawa.ekigelo(essaawa, ebyokwelobozesaako)).to.be.equal('amakya');
+                ebyokwelobozesaako = {};
+
+                ebyokwelobozesaako.endabika = 't';
+                expect($.ebiseelaNeEssaawa.ekigelo(essaawa, ebyokwelobozesaako)).to.be.equal('ekilo');
+                ebyokwelobozesaako = {};
             });
         });
     });

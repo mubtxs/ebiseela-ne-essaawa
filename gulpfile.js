@@ -1,6 +1,7 @@
 // generated on 2018-08-12 using generator-webapp 3.0.1
 const gulp = require('gulp');
 const gulpLoadPlugins = require('gulp-load-plugins');
+const browserSync = require('browser-sync').create();
 const del = require('del');
 
 const $ = gulpLoadPlugins();
@@ -24,7 +25,7 @@ gulp.task('compress', () => {
         }))
         .pipe($.if(dev, $.sourcemaps.write('.')))
         .pipe($.rename({
-            suffix: ".min"
+            suffix: '.min'
         }))
         .pipe(gulp.dest('dist'));
 });
@@ -47,3 +48,17 @@ gulp.task('lint:test', () => {
 });
 
 gulp.task('clean', del.bind(null, ['dist', '.tmp']));
+
+gulp.task('test', () => {
+    browserSync.init({
+        notify: false,
+        port: 9000,
+        server: {
+            baseDir: './test',
+            routes: {
+                '/node_modules': 'node_modules',
+                '/src': 'src'
+            }
+        }
+    });
+});

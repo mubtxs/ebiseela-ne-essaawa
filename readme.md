@@ -9,14 +9,29 @@ $ npm install --save ebiseela-ne-essaawa
 
 ## Usage
 
+Get the date today
 ```js
-const ebiseela-ne-essaawa = require('ebiseela-ne-essaawa');
-
-ebiseela-ne-essaawa('Rainbow');
+/*
+ * funa ebiseela leelo
+ */
+var leelo = $.ebiseelaNeEssaawa.olwaleelo({
+    endabika: 'm'
+}); // olwomukaaga 25 ogwomunaana, 2018
 ```
+
+Get the time now
+```js
+/*
+ * funa essawa kati
+ */
+let kati = $.ebiseelaNeEssaawa.kati({
+    endabika: 'cb'
+}); //  essaawa ya kalasamayanzi ne eddakiika ataanomugumu ne obutikitiki abilimububili
+```
+
 ## License
 
-MIT © [mubtxs]()
+MIT © [mubtxs](https://github.com/mubtxs)
 
 
 [npm-image]: https://badge.fury.io/js/ebiseela-ne-essaawa.svg
