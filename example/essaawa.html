@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="lg-ug">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -14,39 +15,82 @@
 
     <!-- Custom styles for this template -->
     <link href="omusono.css" rel="stylesheet">
-  </head>
 
-  <body class="text-center">
+</head>
+
+<body class="text-center">
 
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-      <header class="masthead mb-auto">
-        <div class="inner">
-          <h3 class="masthead-brand">Essaawa</h3>
-          <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link" href="enkozesa.html">Enkozesa</a>
-            <a class="nav-link" href="ebiseela.html">Ebiseela</a>
-          </nav>
-        </div>
-      </header>
+        <header class="masthead">
+            <div class="inner">
+                <h3 class="masthead-brand">Essaawa</h3>
+                <nav class="nav nav-masthead justify-content-center">
+                    <a class="nav-link" href="ebiseela.html">Ebiseela</a>
+                </nav>
+            </div>
+        </header>
+        
+        <div><hr></div>
 
-      <main role="main" class="inner cover">
-        <h1 class="cover-heading">Cover your page.</h1>
-        <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-        <p class="lead">
-          <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
-        </p>
-      </main>
+        <main role="main" class="inner cover">
+            <h4>Enkozesa ya essaawa</h4>
+            <div class="mt-4">
+                <p>1. Okufuna essaawa</p>
+                <code>
+                    var kati = $.ebiseelaNeEssaawa.kati({
+                    <br/> endabika: 'm'
+                    <br/> }); <span>//</span>
+                    <span id="kati-m"></span>
+                </code>
+            </div>
+            <div class="mt-4">
+                <p>2. Okufuna essawa mu bigambo byoka</p>
+                <code>
+                    var kati = $.ebiseelaNeEssaawa.kati({
+                    <br/> endabika: 'cb'
+                    <br/> }); <span>//</span>
+                    <span id="kati-cb"></span>
+                </code>
+            </div>
 
-      <footer class="mastfoot mt-auto">
-        <div class="inner">
-          <p>Ebyokulabilako ku nkozesa ya <a href="#">Ebiseela Na Essaawa</a></p>
-        </div>
-      </footer>
+            <div class="mt-4">
+                <p>3. Okufuna essaawa mu bigambo ebitono</p>
+                <code>
+                    var kati = $.ebiseelaNeEssaawa.kati({
+                    <br/> endabika: 'cmtss'
+                    <br/> }); <span>//</span>
+                    <span id="kati-cmtss"></span>
+                </code>
+            </div>
+        </main>
+
+        <footer class="mastfoot mt-auto">
+            <div class="inner">
+                <p>Ebyokulabilako ku nkozesa ya
+                    <a href="#">Ebiseela Na Essaawa</a>
+                </p>
+            </div>
+        </footer>
     </div>
     <!-- JavaScript -->
     <script src="../node_modules/jquery/dist/jquery.js"></script>
-    <script src="../dist/jquery.ebiseela-ne-essaawa.js"></script>
-    <script src="../node_modules/popper.js/dist/popper.js"></script>
+    <script src="../dist/jquery.ebiseela-ne-essaawa.min.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  </body>
+
+    <script>
+        document.getElementById("kati-m").innerHTML = $.ebiseelaNeEssaawa.kati({
+            endabika: 'm'
+        });
+
+        document.getElementById("kati-cb").innerHTML = $.ebiseelaNeEssaawa.kati({
+            endabika: 'cb'
+        });
+
+        document.getElementById("kati-cmtss").innerHTML = $.ebiseelaNeEssaawa.kati({
+            endabika: 'cmtss'
+        });
+    </script>
+
+</body>
+
 </html>

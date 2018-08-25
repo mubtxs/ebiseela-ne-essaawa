@@ -7,7 +7,7 @@
 
 'use strict';
 
-let $, funaAmazooba, funaEnzingu, funaAkagamboAkagata, funaEssaawa, funaEkigelo, funaEkigeloKyaEssaawaEkifunze, funaEkigeloKyaEssaawa, funaEkitunduKyaOlunaku, sengekaEbyokwelobozesaakoKuBiseela, sengekaEbyokwelobozesaakoKuSsaawa, funaEbyokwelobozesaakoEbisuubilwa, funaEndabikaKuBiseela, funaEndabikaKuBiseelaMuBufunze1, funaEndabikaKuBiseelaMuBufunze2, gyamuOkwelobozaKuOlunaku,
+let $, funaOmwezi, funaEnzingu, funaEssaawa, funaEkigelo, funaEkigeloKyaEssaawaEkifunze, funaEkigeloKyaEssaawa, funaEkitunduKyaOlunaku, funaEbiseela, funaEbyokwelobozesaakoEbisuubilwa, funaEbyokwelobozesaakoEbyenjawulo, funaOmwakaMuBigambo, funaOlunaku, funaOmwaka, funaEssaawaMuBigambo, funaEssaawaObaEddakiikaObaMuBigambo, funaObutiktikiMuBigambo, mpaEssaawaMuBigambo, mpaEssaawaMuNnamba, funaEssaawaMuNnamba, gatakoZzeelo, funaMeka, funaOlunakuOlukulu,
     slice = [].slice;
 
 $ = window.jQuery || window.$;
@@ -17,7 +17,7 @@ $.ebiseelaNeEssaawa = {};
 $.ebiseelaNeEssaawa.fn = {};
 
 $.fn.ebiseelaNeEssaawa = () => {
-    let args, method;
+    var args, method;
     method = arguments[0];
     args = arguments.length >= 2 ? slice.call(arguments, 1) : [];
     return $.ebiseelaNeEssaawa.fn[method].apply(this, args);
@@ -30,155 +30,135 @@ const ENDABIKA = {
         // d -> olunaku lwa wiiki
         // w -> olunaku lwa omwezi
         // m -> omwezi
-        // y -> owaka
+        // y -> owaka 
+        /* mu bujjuvu */
         m: 'm', // d[m] w m[m], y 
-        ms: 'ms', // d[ms] w m[ms], y 
+        ms: 'ms', // d[ms] w m[ms], y
+        ma: 'ma', // d[m] w[b] m[m], y  
+        mc: 'mc', // d[m] w[b] m[m], y[b]
         b: 'b', // d[b] w m[b], y 
-        bs: 'bs', // d[bs] w m[bs], y 
+        bs: 'bs', // d[bs] w m[bs], y
+        ba: 'ba', // d[b] w[b] m[b], y
+        bc: 'bc', // d[b] w[b] m[b], y[b]
         l: 'l', // d[l] w m[l], y 
         ls: 'ls', // d[ls] w m[ls], y 
+        la: 'la', // d[l] w[b] m[l], y 
+        lc: 'lc', // d[l] w[b] m[l], y[b]
         e: 'e', // d[e] w m[e], y 
-        es: 'es', // d[es] w m[es], y 
+        es: 'es', // d[es] w m[es], y
+        ea: 'ea', // d[e] w[b] m[e], y 
+        ec: 'ec', // d[e] w[b] m[e], y[b] 
         msd: 'msd', // d[ms] w m[m], y 
         msm: 'msm', // d[m] w m[ms], y 
         bsd: 'bsd', // d[bs] w m[b], y 
         bsm: 'bsm', // d[b] w m[bs], y 
         lsd: 'lsd', // d[ls] w m[l], y 
         lsm: 'lsm', // d[l] w m[ls], y 
+        /* mu bufunze */
         km: 'km', // w m[m] y 
         kl: 'kl', // w m[l] y 
         kb: 'kb', // w m[b] y
+        kmn: 'kmn', // w[l] m[m] y 
+        kln: 'kln', // w[l] m[l] y 
+        kbn: 'kbn', // w[l] m[b] y
         kms: 'kms', // w-m[ms]-y 
         kls: 'kls', // w-m[ls]-y 
         kbs: 'kbs', // w-m[bs]-y
-        /*********************************/
-        //a: 'a' // olunnaku mu bujjuvu
-        ma: 'ma', // d[m] w m[m], y 
-        msa: 'msa', // d[ms] w m[ms], y 
-        ba: 'ba', // d[b] w m[b], y 
-        bsa: 'bsa', // d[bs] w m[bs], y 
-        la: 'la', // d[l] w m[l], y 
-        lsa: 'lsa', // d[ls] w m[ls], y 
-        ea: 'ea', // d[e] w m[e], y 
-        esa: 'esa', // d[es] w m[es], y 
-        msda: 'msda', // d[ms] w m[m], y 
-        msma: 'msma', // d[m] w m[ms], y 
-        bsda: 'bsda', // d[bs] w m[b], y 
-        bsma: 'bsma', // d[b] w m[bs], y 
-        lsda: 'lsda', // d[ls] w m[l], y 
-        lsma: 'lsma', // d[l] w m[ls], y 
-        kma: 'kma', // w m[m] y 
-        kla: 'kla', // w m[l] y 
-        kba: 'kba', // w m[b] y
-        kmsa: 'kmsa', // w-m[ms]-y 
-        klsa: 'klsa', // w-m[ls]-y 
-        kbsa: 'kbsa' // w-m[bs]-y
+        kmc: 'kmc', // w[b] m[m] y[b] 
+        klc: 'klc', // w[b] m[l] y[b] 
+        kbc: 'kbc', // w[b] m[b] y[b]         
+        kmss: 'kmss', // w/m[ms]/y[s] 
+        klss: 'klss', // w/m[ls]/y[s] 
+        kbss: 'kbss' // w/m[bs]/y[s]
     },
     KATI: {
         // e -> essaawa
         // k -> ekigelo
-        m: 'm', // e[m] 
-        ms: 'ms', // e[ms]
-        mk: 'mk', // e[m] k[k] 
-        mks: 'mks', // e[ms] k[k] 
-        mn: 'mn', // e[m] k[n] 
-        mns: 'mns', // e[ms] k[n]
-        mt: 'mt', // e[m] k[t] 
-        mts: 'mts', // e[ms] k[t]
-        b: 'b', // e[b] 
-        bs: 'bs', // e[bs]
-        bk: 'bk', // e[b] k[k] 
-        bks: 'bks', // e[bs] k[k] 
-        bn: 'bn', // e[b] k[n] 
-        bns: 'bns', // e[bs] k[n]
-        bt: 'bt', // e[b] k[t] 
-        bts: 'bts', // e[bs] k[t]
-        p: 'p', // es[p]
-        ps: 'ps', // es[ps]
+
+        // essaawa mu nnamba
+        m: 'm', // e[m] ess:edd:aka
+        ms: 'ms', // e[ms] ess:edd
+        mss: 'mss', // e[ms] ess
+        mkss: 'mkss', // e[ms] ess
+        mnss: 'mnss', // e[ms] ess
+        mtss: 'mtss', // e[ms] ess
+        // gatako zzeelo ku ssaawa
+        mz: 'mz', // e[m] ess:edd:aka
+        msz: 'msz', // e[ms] ess:edd
+        mssz: 'mssz', // e[ms] ess
+
+        // gatako zzeelo ku ssaawa
+        pz: 'pz', // es[p] ess:edd:aka
+        psz: 'psz', // es[ps] ess:edd
+        pssz: 'pssz', // es[ps] ess
+
+        // essaawa mu bigambo
+        cmk: 'cmk', // e[m] k[k] ess:edd:aka
+        cmks: 'cmks', // e[ms] k[k] ess:edd
+        cmkss: 'cmkss', // e[ms] k[k] ess
+        cmn: 'cmn', // e[m] k[n] 
+        cmns: 'cmns', // e[ms] k[n]
+        cmnss: 'cmnss', // e[ms] k[n]
+        cmt: 'cmt', // e[m] k[t] 
+        cmts: 'cmts', // e[ms] k[t]
+        cmtss: 'cmtss', // e[ms] k[t]
+
+        cb: 'cb', // e[b] ess:edd:aka
+        cbs: 'cbs', // e[bs] ess:edd
+        cbss: 'cbss', // e[bs] ess
+        cbsm: 'cbsm' // e[bs] ess
     },
     // endabika za emyezi
     OMWEZI: {
-        m: 'm', // okusinziira ku mbala
-        ms: 'ms', // okusinziira ku mbala mu bufunze
-        b: 'b', // okusinziira ku bibeelawo
-        bs: 'bs', // okusinziira ku bibeelawo mu bufunze
-        l: 'l', // okusinziira ku lungereza
-        ls: 'ls', // okusinziira ku lungereza mu bufunze
-        e: 'e', // okusinziira ku lungereza
-        es: 'es' // okusinziira ku lungereza mu bufunze
+        m: 'm', // okusinziila ku mbala
+        ms: 'ms', // okusinziila ku mbala mu bufunze
+        b: 'b', // okusinziila ku bibeelawo
+        bs: 'bs', // okusinziila ku bibeelawo mu bufunze
+        l: 'l', // okusinziila ku lungeleza
+        ls: 'ls', // okusinziila ku lungeleza mu bufunze
+        e: 'e', // okusinziila ku lungeleza
+        es: 'es' // okusinziila ku lungeleza mu bufunze
     },
-    OLUNAKU: {
-        m: 'm', // okusinziira ku mbala
-        ms: 'ms', // okusinziira ku mbala mu bufunze
-        b: 'b', // okusinziira ku bibeelawo
-        bs: 'bs', // okusinziira ku bibeelawo mu bufunze
-        l: 'l', // okusinziira ku lungereza
-        ls: 'ls', // okusinziira ku lungereza mu bufunze
-        e: 'e', // erinya edala
-        es: 'es' // erinya edala mu bufunze
+    ENZINGU: {
+        m: 'm', // okusinziila ku mbala
+        ms: 'ms', // okusinziila ku mbala mu bufunze
+        b: 'b', // okusinziila ku bibeelawo
+        bs: 'bs', // okusinziila ku bibeelawo mu bufunze
+        l: 'l', // okusinziila ku lungeleza
+        ls: 'ls', // okusinziila ku lungeleza mu bufunze
+        e: 'e', // elinya edala
+        es: 'es' // elinya edala mu bufunze
     },
     ESSAAWA: {
-        m: 'm', // okusinziira ku mbala ya emisana ne ekiro
-        ms: 'ms', // okusinziira ku mbala ya emisana ne ekiro mu bufunze
-        b: 'b', // okusinziira ku bibeelawo
-        bs: 'bs', // okusinziira ku bibeelawo mu bufunze
-        p: 'p', // okusinziira ku mbala ya olunaku lwona
-        ps: 'ps' // okusinziira ku mbala ya olunaku lwona mu bufunze
+        m: 'm', // okusinziila ku mbala ya emisana ne ekilo
+        ms: 'ms', // okusinziila ku mbala ya emisana ne ekilo mu bufunze
+        b: 'b', // okusinziila ku bibeelawo
+        bs: 'bs', // okusinziila ku bibeelawo mu bufunze
+        p: 'p', // okusinziila ku mbala ya olunaku lwona
+        ps: 'ps', // okusinziila ku mbala ya olunaku lwona mu bufunze
+
+        msz: 'msz', // okusinziila ku mbala ya emisana ne ekilo ate ogateko zzeelo wekyetagisa
+        psz: 'psz' // okusinziila ku mbala ya olunaku lwona mu bufunze ate ogateko zzeelo wekyetagisa
     },
     EKIGELO: {
-        k: 'k', // okusinziira ku mbala ya olunaku lwona
-        n: 'n', // okusinziira ku bibeelawo
-        t: 't' // okusinziira ku mbala ya emisana ne ekiro
+        k: 'k', // okusinziila ku mbala ya olunaku lwona
+        n: 'n', // okusinziila ku bibeelawo
+        t: 't' // okusinziila ku mbala ya emisana ne ekilo
+    },
+    OMWAKA: {
+        m: 'm', // okusinziila ku mbala ya ennamba
+        ms: 'ms', // okusinziila ku mbala ya ennamba ezissembayo ebbili
+        b: 'b', // okusinziila ku mbala ya ennamba mu bigambo
+        bs: 'bs' // okusinziila ku mbala ya ennamba ezissembayo ebbili mu bigambo
+    },
+    OLUNAKU: {
+        m: 'm', // okusinziila ku mbala ya ennamba
+        z: 'z', // okusinziila ku mbala ya ennamba ela ogatte zzeelo ennamba bweba eka wansi wa 10
+        b: 'b', // okusinziila ku mbala ya ennamba mu bigambo
     }
 };
 
-// endabika mu bufunze
-const E_KALE = ENDABIKA.KALENDA,
-    E_KATI = ENDABIKA.KATI,
-    E_MWEZ = ENDABIKA.OMWEZI,
-    E_LUNA = ENDABIKA.OLUNAKU,
-    E_SAWA = ENDABIKA.ESSAAWA,
-    E_KIGE = ENDABIKA.EKIGELO;
-
-/*
-// ennaku za omwezi
-const ENNAKU_ZA_OMWEZI = {
-    LUMU: 'lumu',
-    BBili:'bbili',
-    SSATU:'ssatu',
-    NNYA:'nnya',
-    TTAANO:'ttaano',
-    MUKAAGA:'mukaaga',
-    MUSANVU:'musanvu',
-    MUNAANA:'munaana',
-    MWENDA:'mwenda',
-    KKUMI:'kkumi',
-    KKUMINALUMU:'kkuminalumu',
-    KKUMINABBILI:'kkuminabbili',
-    KKUMINASSATU:'kkuminassatu',
-    KKUMINANNYA:'kkuminannya',
-    KKUMINATTAANO:'kkuminataano',
-    KKUMINAMUKAAGA:'kumminamukaaga',
-    KKUMINAMUSANVU:'kumminamusanvu',
-    KKUMINAMUNAANA:'kumminamunaana',
-    KKUMINAMWENDA:'kumminamwenda',
-    ABILI:'abili',
-    ABILIMULUMU:'abilimulumu',
-    ABILIMUBBILI:'abilimubbili',
-    ABILIMUSSATU:'abilimussatu',
-    ABILIMUNNYA:'abilimussatu',
-    ABILIMUTTAANO:'abilimuttaano',
-    ABILIMUMUKAAGA:'abilimumukaaga',
-    ABILIMUMUSANVU:'abilimumusanvu',
-    ABILIMUMUNAANA:'abilimumunaana',
-    ABILIMUMWENDA:'abilimumwenda',
-    ASATU:'asatu',
-    ASATUMULUMU:'asatumulumu',
-    ASATUMUBBILI:'asatumubbili'
-};
-*/
-
-// ennaku za omwezi
+// ennaku za omwezi 
 const ENNAKU_ZA_OMWEZI = [
     'lumu',
     'bbili',
@@ -204,7 +184,7 @@ const ENNAKU_ZA_OMWEZI = [
     'abilimubbili',
     'abilimussatu',
     'abilimunnya',
-    'abilimuttaano',
+    'abilimutaano',
     'abilimumukaaga',
     'abilimumusanvu',
     'abilimumunaana',
@@ -213,14 +193,98 @@ const ENNAKU_ZA_OMWEZI = [
     'asatumulumu'
 ];
 
+// enyingo za omwaaka mu bigambo
+const ENNYINGO_EZA_OMWAKA = {
+    essooka: [
+        'lukumu',
+        'nkumibbili',
+        'nkumissatu',
+        'nkuminnya',
+        'nkumittaano',
+        'kakaaga',
+        'kasanvu',
+        'kanaana',
+        'kenda'
+    ],
+    eyokubili: [
+        'kikumi',
+        'bibili',
+        'bisatu',
+        'bina',
+        'bitaano',
+        'lukaaga',
+        'lusanvu',
+        'lunaana',
+        'lwenda'
+    ],
+    eyokusatu: [
+        'kkumi',
+        'abili',
+        'asatu',
+        'ana',
+        'ataano',
+        'nkaaga',
+        'nsanvu',
+        'kinaana',
+        'kyenda'
+    ],
+    eyokunna: [
+        'gumu',
+        'bbili',
+        'ssatu',
+        'nnya',
+        'ttaano',
+        'mukaaga',
+        'musanvu',
+        'munaana',
+        'mwenda'
+    ]
+};
+
+// obutikitiki
+const EMBALA_EYA_OBUTIKITIKI = [
+    'kamu',
+    'bubili',
+    'busatu',
+    'buna',
+    'butaano',
+    'mukaaga',
+    'musanvu',
+    'munaana',
+    'mwenda'
+];
+
+// akagambo akagata
+const NNALUGANDA = {
+    MU: 'mu',
+    EZA: 'eza',
+    EZ: 'ez', // ez'
+    NE: 'ne',
+    NA: 'na',
+    N: 'n', // n'
+    EYA: 'eya',
+    EY: 'ey', // ey'
+    Y: 'y' // y'
+};
+
+// endabika mu bufunze
+const E_KALE = ENDABIKA.KALENDA,
+    E_KATI = ENDABIKA.KATI,
+    E_MWEZ = ENDABIKA.OMWEZI,
+    E_ENZI = ENDABIKA.ENZINGU,
+    E_SAWA = ENDABIKA.ESSAAWA,
+    E_LUNA = ENDABIKA.OLUNAKU,
+    E_MWAK = ENDABIKA.OMWAKA,
+    E_KIGE = ENDABIKA.EKIGELO;
+
 /*
  * Funa amazooba/emyezi ga omwaka
  *
- * akakolero akawa amazooba ga omwaka okusinziira ku nbabika
- * Endabika 
- * - m: okusinziira ku mbala
- * - b: okusinziira ku bibeelawo
- * - l: okusinziira ku lungereza
+ * akakolelo akawa amazooba ga omwaka okusinziila ku nbabika
+ * Endabika
+ * - m: okusinziila ku mbala
+ * - b: okusinziila ku bibeelawo
+ * - l: okusinziila ku lungeleza
  * - 's': mu bufunze
  *
  * @param {number} enu ennamba ya omwezi
@@ -228,7 +292,7 @@ const ENNAKU_ZA_OMWEZI = [
  * 
  * @return {string} omwezi
  */
-funaAmazooba = (enu = 0, emp = 'b') => {
+funaOmwezi = (enu = 0, emp = 'b') => {
     switch (enu) {
         case 0:
             switch (emp) {
@@ -500,12 +564,12 @@ funaAmazooba = (enu = 0, emp = 'b') => {
 /*
  * Funa enzingu/ennaku zza ddimansi/wiiki
  *
- * akakolero akafuna enzingu/ennaku zza ddimansi/wiiki okusinziira ku nbabika
+ * akakolelo akafuna enzingu/ennaku zza ddimansi/wiiki okusinziila ku nbabika
  * Endabika ezikilizibwa:
- * - m: okusinziira ku mbala
- * - b: okusinziira ku balubaale
- * - e: erinya edala
- * - l: okusinziira ku lungereza
+ * - m: okusinziila ku mbala
+ * - b: okusinziila ku balubaale
+ * - e: elinya edala
+ * - l: okusinziila ku lungeleza
  * - 's': mu bufunze
  *
  * @param {number} enu ennamba ya olunaku
@@ -514,136 +578,135 @@ funaAmazooba = (enu = 0, emp = 'b') => {
  * @return {string} omwezi
  */
 funaEnzingu = (enu = 0, emp = 'b') => {
-    switch (enu) {
-        case 0:
-            switch (emp) {
-                case E_LUNA.bs:
-                    return 'wam';
-                case E_LUNA.b:
-                    return 'wamunyi';
-                case E_LUNA.es:
-                    return 'bbal';
-                case E_LUNA.e:
-                    return 'bbalaza';
-                case E_LUNA.ls:
-                    return 'mman';
-                case E_LUNA.l:
-                    return 'mmande';
-                case E_LUNA.ms:
-                    return 'olw1';
-                case E_LUNA.m:
-                    return 'olwokusooka';
-                default:
-                    throw Error('endabika temanyiddwa');
-            }
 
+    switch (enu) {
         case 1:
             switch (emp) {
-                case E_LUNA.bs:
-                    return 'kaz';
-                case E_LUNA.b:
-                    return 'kazooba';
-                case E_LUNA.ms:
-                case E_LUNA.es:
-                case E_LUNA.ls:
-                    return 'olw2';
-                case E_LUNA.m:
-                case E_LUNA.l:
-                case E_LUNA.e:
-                    return 'olwokubili';
+                case E_ENZI.bs:
+                    return 'wam';
+                case E_ENZI.b:
+                    return 'wamunyi';
+                case E_ENZI.es:
+                case E_ENZI.ls:
+                    return 'bbal';
+                case E_ENZI.e:
+                case E_ENZI.l:
+                    return 'bbalaza';
+                case E_ENZI.ms:
+                    return 'olw1';
+                case E_ENZI.m:
+                    return 'olwokusooka';
                 default:
                     throw Error('endabika temanyiddwa');
             }
 
         case 2:
             switch (emp) {
-                case E_LUNA.bs:
-                    return 'wal';
-                case E_LUNA.b:
-                    return 'walumbe';
-                case E_LUNA.ms:
-                case E_LUNA.es:
-                case E_LUNA.ls:
-                    return 'olw3';
-                case E_LUNA.m:
-                case E_LUNA.l:
-                case E_LUNA.e:
-                    return 'olwokusatu';
+                case E_ENZI.bs:
+                    return 'kaz';
+                case E_ENZI.b:
+                    return 'kazooba';
+                case E_ENZI.ms:
+                case E_ENZI.es:
+                case E_ENZI.ls:
+                    return 'olw2';
+                case E_ENZI.m:
+                case E_ENZI.l:
+                case E_ENZI.e:
+                    return 'olwokubili';
                 default:
                     throw Error('endabika temanyiddwa');
             }
 
         case 3:
             switch (emp) {
-                case E_LUNA.bs:
-                    return 'muk';
-                case E_LUNA.b:
-                    return 'mukasa';
-                case E_LUNA.ms:
-                case E_LUNA.es:
-                case E_LUNA.ls:
-                    return 'olw4';
-                case E_LUNA.m:
-                case E_LUNA.l:
-                case E_LUNA.e:
-                    return 'olwokuna';
+                case E_ENZI.bs:
+                    return 'wal';
+                case E_ENZI.b:
+                    return 'walumbe';
+                case E_ENZI.ms:
+                case E_ENZI.es:
+                case E_ENZI.ls:
+                    return 'olw3';
+                case E_ENZI.m:
+                case E_ENZI.l:
+                case E_ENZI.e:
+                    return 'olwokusatu';
                 default:
                     throw Error('endabika temanyiddwa');
             }
 
         case 4:
             switch (emp) {
-                case E_LUNA.bs:
-                    return 'kiw';
-                case E_LUNA.b:
-                    return 'kiwanuka';
-                case E_LUNA.es:
-                    return 'jum';
-                case E_LUNA.e:
-                    return 'juma';
-                case E_LUNA.ms:
-                case E_LUNA.ls:
-                    return 'olw5';
-                case E_LUNA.m:
-                case E_LUNA.l:
-                    return 'olwokutaano';
+                case E_ENZI.bs:
+                    return 'muk';
+                case E_ENZI.b:
+                    return 'mukasa';
+                case E_ENZI.ms:
+                case E_ENZI.es:
+                case E_ENZI.ls:
+                    return 'olw4';
+                case E_ENZI.m:
+                case E_ENZI.l:
+                case E_ENZI.e:
+                    return 'olwokuna';
                 default:
                     throw Error('endabika temanyiddwa');
             }
 
         case 5:
             switch (emp) {
-                case E_LUNA.bs:
-                    return 'nag';
-                case E_LUNA.b:
-                    return 'nagawonye';
-                case E_LUNA.ms:
-                case E_LUNA.es:
-                case E_LUNA.ls:
-                    return 'olw6';
-                case E_LUNA.m:
-                case E_LUNA.l:
-                case E_LUNA.e:
-                    return 'olwomukaaga';
+                case E_ENZI.bs:
+                    return 'kiw';
+                case E_ENZI.b:
+                    return 'kiwanuka';
+                case E_ENZI.es:
+                    return 'jum';
+                case E_ENZI.e:
+                    return 'juma';
+                case E_ENZI.ms:
+                case E_ENZI.ls:
+                    return 'olw5';
+                case E_ENZI.m:
+                case E_ENZI.l:
+                    return 'olwokutaano';
                 default:
                     throw Error('endabika temanyiddwa');
             }
 
         case 6:
             switch (emp) {
-                case E_LUNA.bs:
+                case E_ENZI.bs:
+                    return 'nag';
+                case E_ENZI.b:
+                    return 'nagawonye';
+                case E_ENZI.ms:
+                case E_ENZI.es:
+                case E_ENZI.ls:
+                    return 'olw6';
+                case E_ENZI.m:
+                case E_ENZI.l:
+                case E_ENZI.e:
+                    return 'olwomukaaga';
+                default:
+                    throw Error('endabika temanyiddwa');
+            }
+
+        case 0:
+            switch (emp) {
+                case E_ENZI.bs:
                     return 'wan';
-                case E_LUNA.b:
+                case E_ENZI.b:
                     return 'wangu';
-                case E_LUNA.ls:
+                case E_ENZI.ls:
                     return 'Ssan';
-                case E_LUNA.l:
+                case E_ENZI.l:
                     return 'Ssande';
-                case E_LUNA.ms:
-                case E_LUNA.es:
+                case E_ENZI.ms:
+                case E_ENZI.es:
                     return 'olw7';
-                case E_LUNA.m:
-                case E_LUNA.e:
+                case E_ENZI.m:
+                case E_ENZI.e:
                     return 'olwomusanvu';
                 default:
                     throw Error('endabika temanyiddwa');
@@ -657,11 +720,11 @@ funaEnzingu = (enu = 0, emp = 'b') => {
 /*
  * Funa essaawa
  *
- * akakolero akafuna essaawa okusinziira ku nbabika
+ * akakolelo akafuna essaawa okusinziila ku nbabika
  * Endabika ezikilizibwa:
- * - m: okusinziira ku mbala ya emisana ne ekiro
- * - p: okusinziira ku mbala ya olunaku lwona
- * - b: okusinziira ku bibeelawo
+ * - m: okusinziila ku mbala ya emisana ne ekilo
+ * - p: okusinziila ku mbala ya olunaku lwona
+ * - b: okusinziila ku bibeelawo
  * - 's': mu bufunze
  *
  * @param {number} enu ennamba ya olunaku
@@ -674,7 +737,7 @@ funaEssaawa = (enu = 0, emp = 'b') => {
         case 0:
             switch (emp) {
                 case E_SAWA.b:
-                    return 'kisisimukeekyokubiri';
+                    return 'kisisimukeekyokubili';
                 case E_SAWA.bs:
                     return 'kis2';
                 case E_SAWA.m:
@@ -686,7 +749,7 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ps:
                     return '0';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 1:
@@ -704,7 +767,7 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ps:
                     return '1';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 2:
@@ -722,13 +785,13 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ps:
                     return '2';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 3:
             switch (emp) {
                 case E_SAWA.b:
-                    return 'nkokeembereberye';
+                    return 'nkokeembelebelye';
                 case E_SAWA.bs:
                     return 'nko1';
                 case E_SAWA.m:
@@ -736,17 +799,17 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ms:
                     return '9';
                 case E_SAWA.p:
-                    return 'satu';
+                    return 'ssatu';
                 case E_SAWA.ps:
                     return '3';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 4:
             switch (emp) {
                 case E_SAWA.b:
-                    return 'nkokeeyookubiri';
+                    return 'nkokeeyookubili';
                 case E_SAWA.bs:
                     return 'nko2';
                 case E_SAWA.m:
@@ -754,11 +817,11 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ms:
                     return '10';
                 case E_SAWA.p:
-                    return 'satu';
+                    return 'nnya';
                 case E_SAWA.ps:
-                    return '3';
+                    return '4';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 5:
@@ -776,7 +839,7 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ps:
                     return '5';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 6:
@@ -794,13 +857,13 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ps:
                     return '6';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 7:
             switch (emp) {
                 case E_SAWA.b:
-                    return 'maliiri';
+                    return 'maliili';
                 case E_SAWA.bs:
                     return 'mali';
                 case E_SAWA.m:
@@ -812,7 +875,7 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ps:
                     return '7';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 8:
@@ -830,7 +893,7 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ps:
                     return '8';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 9:
@@ -848,7 +911,7 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ps:
                     return '9';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 10:
@@ -866,7 +929,7 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ps:
                     return '10';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 11:
@@ -884,7 +947,7 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ps:
                     return '11';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 12:
@@ -902,7 +965,7 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ps:
                     return '12';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 13:
@@ -920,7 +983,7 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ps:
                     return '13';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 14:
@@ -936,9 +999,9 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.p:
                     return 'kkuminennya';
                 case E_SAWA.ps:
-                    return '13';
+                    return '14';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 15:
@@ -956,7 +1019,7 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ps:
                     return '15';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 16:
@@ -974,7 +1037,7 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ps:
                     return '16';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 17:
@@ -992,7 +1055,7 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ps:
                     return '17';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 18:
@@ -1010,25 +1073,25 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ps:
                     return '18';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 19:
             switch (emp) {
                 case E_SAWA.b:
-                    return 'ggulolimu';
+                    return 'Malyakyaggulo';
                 case E_SAWA.bs:
-                    return 'ggul';
+                    return 'maly';
                 case E_SAWA.m:
-                    return 'satu';
+                    return 'emu';
                 case E_SAWA.ms:
-                    return '3';
+                    return '1';
                 case E_SAWA.p:
-                    return 'abilimwemu';
+                    return 'kkuminamwenda';
                 case E_SAWA.ps:
-                    return '21';
+                    return '19';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 20:
@@ -1046,7 +1109,7 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ps:
                     return '20';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 21:
@@ -1064,7 +1127,7 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ps:
                     return '21';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 22:
@@ -1082,7 +1145,7 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ps:
                     return '22';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         case 23:
@@ -1100,7 +1163,7 @@ funaEssaawa = (enu = 0, emp = 'b') => {
                 case E_SAWA.ps:
                     return '23';
                 default:
-                    throw new Error('endabika temanyiddwa');
+                    throw new Error('endabika ya essaawa temanyiddwa');
             }
 
         default:
@@ -1109,66 +1172,13 @@ funaEssaawa = (enu = 0, emp = 'b') => {
 };
 
 /*
- * Funa akagambo akagata
+ * Funa ekigelo kya essaawa
  *
- * akakolero akagambo akagata essaawa okusinziira ku mbala ya essaawa
+ * akakolelo akafuna ekigelo okusinziila ku nbabika
  * Endabika ezikilizibwa:
- * - k: okusinziira ku mbala ya emisana ne ekiro
- * - n: okusinziira ku mbala ya olunaku lwona
- * - b: okusinziira ku bibeelawo
- * 
- * @param {number} enu ennamba ya olunaku
- * @param {string} emp endabika ya olunaku
- * 
- * @return {string} akagambo
- */
-funaAkagamboAkagata = (enu = 0, emp = 'b') => {
-    if (emp === E_SAWA.b) {
-        switch (enu) {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-                return 'mu';
-
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-            case 11:
-            case 12:
-            case 13:
-            case 14:
-            case 15:
-            case 16:
-            case 17:
-            case 18:
-            case 19:
-            case 20:
-            case 21:
-            case 22:
-            case 23:
-                return 'eza';
-
-            default:
-                throw Error('essaawa temanyiddwa');
-        }
-    } else {
-        return 'eza';
-    }
-};
-
-/*
- * Funa ekigelo kyaessaawa 
- *
- * akakolero akafuna ekigelo okusinziira ku nbabika
- * Endabika ezikilizibwa:
- * - k: okusinziira ku mbala ya emisana ne ekiro
- * - n: okusinziira ku mbala ya olunaku lwona
- * - b: okusinziira ku bibeelawo
+ * - k: okusinziila ku mbala ya emisana ne ekilo
+ * - n: okusinziila ku mbala ya olunaku lwona
+ * - b: okusinziila ku bibeelawo
  *
  * @param {number} enu ennamba ya olunaku
  * @param {string} emp endabika ya olunaku
@@ -1183,18 +1193,18 @@ funaEkigelo = (enu = 0, emp = '') => {
     } else if (emp === E_KIGE.t) {
         return funaEkitunduKyaOlunaku(enu);
     } else {
-        return '';
+        throw new Error('endabika ya ekigelo temanyiddwa');
     }
 };
 
 /*
  * Funa essaawa mu bibinja
  *
- * akakolero akafuna essaawa mu bibinja okusinziira ku nbabika
+ * akakolelo akafuna essaawa mu bibinja okusinziila ku nbabika
  * Endabika ezikilizibwa:
- * - k: okusinziira ku mbala ya emisana ne ekiro
- * - n: okusinziira ku mbala ya olunaku lwona
- * - b: okusinziira ku bibeelawo
+ * - k: okusinziila ku mbala ya emisana ne ekilo
+ * - n: okusinziila ku mbala ya olunaku lwona
+ * - b: okusinziila ku bibeelawo
  *
  * @param {number} enu ennamba ya olunaku
  * @param {string} emp endabika ya olunaku
@@ -1207,12 +1217,12 @@ funaEkigeloKyaEssaawa = (enu) => {
         case 1:
         case 2:
         case 3:
-            return 'ttumbi';
+            return 'ettumbi';
 
         case 4:
         case 5:
         case 6:
-            return 'matulutulu';
+            return 'amatulutulu';
 
         case 7:
         case 8:
@@ -1239,14 +1249,14 @@ funaEkigeloKyaEssaawa = (enu) => {
         case 21:
         case 22:
         case 23:
-            return 'ekiro';
+            return 'ekilo';
 
         default:
             throw Error('ekigelo kya essaawa temanyiddwa');
     }
 };
 
-// akakolero akafuna essaawa mu bibinja okusinziira ku biseera bya olunaku
+// akakolelo akafuna essaawa mu bibinja okusinziila ku biseela bya olunaku
 funaEkigeloKyaEssaawaEkifunze = (enu) => {
     switch (enu) {
         case 20:
@@ -1258,7 +1268,7 @@ funaEkigeloKyaEssaawaEkifunze = (enu) => {
         case 2:
         case 3:
         case 4:
-            return 'ekiro';
+            return 'ekilo';
 
         case 5:
         case 6:
@@ -1286,9 +1296,14 @@ funaEkigeloKyaEssaawaEkifunze = (enu) => {
     }
 };
 
-// akakolero akafuna essaawa mu bibinja okusinziira ku bitundu ebubili ebya olunaku
+// akakolelo akafuna essaawa mu bibinja okusinziila ku bitundu ebubili ebya olunaku
 funaEkitunduKyaOlunaku = (enu) => {
     switch (enu) {
+        case 19:
+        case 20:
+        case 21:
+        case 22:
+        case 23:
         case 0:
         case 1:
         case 2:
@@ -1296,13 +1311,13 @@ funaEkitunduKyaOlunaku = (enu) => {
         case 4:
         case 5:
         case 6:
+            return 'ekilo';
+
         case 7:
         case 8:
         case 9:
         case 10:
         case 11:
-            return 'amakya';
-
         case 12:
         case 13:
         case 14:
@@ -1310,15 +1325,739 @@ funaEkitunduKyaOlunaku = (enu) => {
         case 16:
         case 17:
         case 18:
-        case 19:
-        case 20:
-        case 21:
-        case 22:
-        case 23:
             return 'emisana';
 
         default:
             throw Error('ekitundu kya olunaku temanyiddwa');
+    }
+};
+
+// funa endabika ya olunaku 
+funaOlunaku = (olu = 0, end = 'm') => {
+    if (end === 'm') {
+        return `${olu}`;
+    } else if (end === 'z') {
+        if (olu < 10) {
+            return `0${olu}`;
+        } else {
+            return `${olu}`;
+        }
+    } else if (end === 'b') {
+        return ENNAKU_ZA_OMWEZI[olu - 1];
+    }
+};
+
+// ezimu ku nnaku enkulu mu mwaka
+funaOlunakuOlukulu = (mwe = 0, lun = 0) => {
+    let lunaku = `${mwe}-${lun}`;
+
+    switch (lunaku) {
+        case '0-1':
+            return 'olusooka omwaka';
+
+        case '2-3':
+            return 'olwabakazi';
+
+        case '4-1':
+            return 'olwabakozi';
+
+        case '5-3':
+            return 'olwabajulizi';
+
+        case '9-9':
+            return 'olwameefuga';
+
+        case '11-25':
+            return 'sekukkulu';
+
+        case '11-26':
+            return 'oluddilila sekukkulu';
+
+        default:
+            throw new Error(`olunaku olukulu ${lun} mu mwezi ${mwe} tegumanyiddwa`);
+    }
+};
+
+// omwaka mu bigambo
+funaOmwakaMuBigambo = (omw = '0', emp = 'v') => {
+
+    let obuwanvu = omw.length,
+        kkumi, makumi, bikumi, nkumi,
+        kkumimu, makumimu, bikumimu,
+        kkuminnal, makuminnal;
+
+    if (emp === 'v') {
+        switch (obuwanvu) {
+            case 1:
+                kkumi = parseInt(omw, 10);
+                return `${ENNYINGO_EZA_OMWAKA.eyokunna[kkumi-1]}`;
+
+            case 2:
+                makumi = parseInt(omw.charAt(0), 10);
+
+                kkumi = parseInt(omw.charAt(1), 10);
+                kkuminnal = kkumi == 0 ? '' : `${makumi == 1 ? NNALUGANDA.NA : NNALUGANDA.MU}`;
+                kkumimu = kkumi == 0 ? '' : `${kkuminnal}${ENNYINGO_EZA_OMWAKA.eyokunna[kkumi-1]}`;
+
+                return `${ENNYINGO_EZA_OMWAKA.eyokusatu[makumi-1]}${kkumimu}`.trim();
+
+            case 3:
+                bikumi = parseInt(omw.charAt(0), 10);
+
+                makumi = parseInt(omw.charAt(1), 10);
+                makumimu = makumi == 0 ? '' : `${ENNYINGO_EZA_OMWAKA.eyokusatu[makumi-1]}`;
+
+                kkumi = parseInt(omw.charAt(2), 10);
+                kkumimu = kkumi == 0 ? '' : `${ENNYINGO_EZA_OMWAKA.eyokunna[kkumi-1]}`;
+
+                kkuminnal = kkumi == 0 || makumi == 0 ? '' : `${makumi == 1 ? NNALUGANDA.NA : NNALUGANDA.MU}`;
+
+                makuminnal = kkumi == 0 && makumi == 0 ? '' : ' ';
+
+                return `${ENNYINGO_EZA_OMWAKA.eyokubili[bikumi-1]}${makuminnal}${makumimu}${kkuminnal}${kkumimu}`.trim();
+
+            case 4:
+                nkumi = parseInt(omw.charAt(0), 10);
+
+                bikumi = parseInt(omw.charAt(1), 10);
+                bikumimu = bikumi == 0 ? '' : ` ${NNALUGANDA.MU} ${ENNYINGO_EZA_OMWAKA.eyokubili[bikumi-1]}`;
+
+                makumi = parseInt(omw.charAt(2), 10);
+                makumimu = makumi == 0 ? '' : `${ENNYINGO_EZA_OMWAKA.eyokusatu[makumi-1]}`;
+
+                kkumi = parseInt(omw.charAt(3), 10);
+                kkumimu = kkumi == 0 ? '' : `${ENNYINGO_EZA_OMWAKA.eyokunna[kkumi-1]}`;
+
+                kkuminnal = kkumi == 0 || makumi == 0 ? '' : `${makumi == 1 ? NNALUGANDA.NA : NNALUGANDA.MU}`;
+                makuminnal = kkumi == 0 && makumi == 0 ? '' : ' ';
+
+                return `${ENNYINGO_EZA_OMWAKA.essooka[nkumi-1]}${bikumimu}${makuminnal}${makumimu}${kkuminnal}${kkumimu}`.trim();
+
+            default:
+                throw new Error(`omwaka ${omw} tegukkilizibwa`);
+        }
+    } else if (emp === 'z') {
+        if (obuwanvu === 4) {
+            makumi = parseInt(omw.charAt(2), 10);
+
+            kkumi = parseInt(omw.charAt(3), 10);
+            kkuminnal = kkumi == 0 ? '' : makumi == 1 ? NNALUGANDA.NA : NNALUGANDA.MU;
+            kkumimu = kkumi == 0 ? '' : `${kkuminnal}${ENNYINGO_EZA_OMWAKA.eyokunna[kkumi-1]}`;
+
+            return `${ENNYINGO_EZA_OMWAKA.eyokusatu[makumi-1]}${kkuminnal}${kkumimu}`;
+        } else {
+            throw new Error(`emyaka ${omw} mitono nnyo okufunzibwa mu bigambo`);
+        }
+    } else {
+        throw new Error('endabikka ya omwaka mu bigambo temanyiddwa');
+    }
+};
+
+// funa omwaka mu bufunze
+funaOmwaka = (omw = 0, emp = 'm') => {
+
+    // obuwanvu bwa omwaka
+    // v: bujjuvu
+    // z: bufunze
+
+    if (omw <= 0) {
+        throw new Error('omwaka gulina okusukka ku 0');
+    } else if (omw > 9999) {
+        throw new Error('omwaka tegulina kusukka ku 9999');
+    } else {
+        switch (emp) {
+            case E_MWAK.b:
+                return funaOmwakaMuBigambo(`${omw}`, 'v');
+
+            case E_MWAK.bs:
+                return funaOmwakaMuBigambo(`${omw}`, 'z');
+
+            case E_MWAK.m:
+                return `${omw}`;
+
+            case E_MWAK.ms:
+                if (omw >= 1000) {
+                    return `${omw}`.substr(2, 2);
+                } else {
+                    return `${omw}`;
+                }
+
+            default:
+                throw new Error('endabika ya omwaka temanyiddwa');
+        }
+    }
+};
+
+// funa esengaka ya ebiseela
+funaEbyokwelobozesaakoEbyenjawulo = (end = 'm') => {
+    let endabikaZange = {
+        enzingu: E_ENZI.m,
+        olunaku: E_LUNA.m,
+        omwezi: E_ENZI.m,
+        omwaka: E_MWAK.m,
+        nnyimpi: false,
+        // b: '" "' akabanga
+        // z: '-'   akasaze
+        // t: '/'   akasittale
+        // k: ','   akasukkize
+        enjawula: 'b'
+    };
+
+    switch (end) {
+        case E_KALE.m:
+        case E_KALE.ms:
+        case E_KALE.b:
+        case E_KALE.bs:
+        case E_KALE.l:
+        case E_KALE.ls:
+        case E_KALE.e:
+        case E_KALE.es:
+            endabikaZange.enzingu = end;
+            endabikaZange.omwezi = end;
+            break;
+
+        case E_KALE.ma:
+            endabikaZange.enzingu = E_ENZI.m;
+            endabikaZange.omwezi = E_MWEZ.m;
+            endabikaZange.olunaku = E_LUNA.b;
+            break;
+
+        case E_KALE.ba:
+            endabikaZange.enzingu = E_ENZI.b;
+            endabikaZange.omwezi = E_MWEZ.b;
+            endabikaZange.olunaku = E_LUNA.b;
+            break;
+
+        case E_KALE.la:
+            endabikaZange.enzingu = E_ENZI.l;
+            endabikaZange.omwezi = E_MWEZ.l;
+            endabikaZange.olunaku = E_LUNA.b;
+            break;
+
+        case E_KALE.ea:
+            endabikaZange.enzingu = E_ENZI.e;
+            endabikaZange.omwezi = E_MWEZ.e;
+            endabikaZange.olunaku = E_LUNA.b;
+            break;
+
+        case E_KALE.mc:
+            endabikaZange.enzingu = E_ENZI.m;
+            endabikaZange.omwezi = E_MWEZ.m;
+            endabikaZange.omwaka = E_MWAK.b;
+            endabikaZange.olunaku = E_LUNA.b;
+            break;
+
+        case E_KALE.bc:
+            endabikaZange.enzingu = E_ENZI.b;
+            endabikaZange.omwezi = E_MWEZ.b;
+            endabikaZange.omwaka = E_MWAK.b;
+            endabikaZange.olunaku = E_LUNA.b;
+            break;
+
+        case E_KALE.lc:
+            endabikaZange.enzingu = E_ENZI.l;
+            endabikaZange.omwezi = E_MWEZ.l;
+            endabikaZange.omwaka = E_MWAK.b;
+            endabikaZange.olunaku = E_LUNA.b;
+            break;
+
+        case E_KALE.ec:
+            endabikaZange.enzingu = E_ENZI.e;
+            endabikaZange.omwezi = E_MWEZ.e;
+            endabikaZange.omwaka = E_MWAK.b;
+            endabikaZange.olunaku = E_LUNA.b;
+            break;
+
+        case E_KALE.msd:
+            endabikaZange.enzingu = E_ENZI.ms;
+            endabikaZange.omwezi = E_MWEZ.m;
+            break;
+
+        case E_KALE.msm:
+            endabikaZange.enzingu = E_ENZI.m;
+            endabikaZange.omwezi = E_MWEZ.ms;
+            break;
+
+        case E_KALE.bsd:
+            endabikaZange.enzingu = E_ENZI.bs;
+            endabikaZange.omwezi = E_MWEZ.b;
+            break;
+
+        case E_KALE.bsm:
+            endabikaZange.enzingu = E_ENZI.b;
+            endabikaZange.omwezi = E_MWEZ.bs;
+            break;
+
+        case E_KALE.lsd:
+            endabikaZange.enzingu = E_ENZI.ls;
+            endabikaZange.omwezi = E_MWEZ.l;
+            break;
+
+        case E_KALE.lsm:
+            endabikaZange.enzingu = E_ENZI.l;
+            endabikaZange.omwezi = E_MWEZ.ls;
+            break;
+
+        case E_KALE.km:
+            endabikaZange.omwezi = E_MWEZ.m;
+            endabikaZange.nnyimpi = true;
+            break;
+
+        case E_KALE.kl:
+            endabikaZange.omwezi = E_MWEZ.l;
+            endabikaZange.nnyimpi = true;
+            break;
+
+        case E_KALE.kb:
+            endabikaZange.omwezi = E_MWEZ.b;
+            endabikaZange.nnyimpi = true;
+            break;
+
+        case E_KALE.kmn:
+            endabikaZange.omwezi = E_MWEZ.m;
+            endabikaZange.olunaku = E_LUNA.z;
+            endabikaZange.nnyimpi = true;
+            break;
+
+        case E_KALE.kln:
+            endabikaZange.omwezi = E_MWEZ.l;
+            endabikaZange.olunaku = E_LUNA.z;
+            endabikaZange.nnyimpi = true;
+            break;
+
+        case E_KALE.kbn:
+            endabikaZange.omwezi = E_MWEZ.b;
+            endabikaZange.olunaku = E_LUNA.z;
+            endabikaZange.nnyimpi = true;
+            break;
+
+        case E_KALE.kms:
+            endabikaZange.omwezi = E_MWEZ.ms;
+            endabikaZange.nnyimpi = true;
+            endabikaZange.enjawula = 'z';
+            break;
+
+        case E_KALE.kls:
+            endabikaZange.omwezi = E_MWEZ.ls;
+            endabikaZange.nnyimpi = true;
+            endabikaZange.enjawula = 'z';
+            break;
+
+        case E_KALE.kbs:
+            endabikaZange.omwezi = E_MWEZ.bs;
+            endabikaZange.nnyimpi = true;
+            endabikaZange.enjawula = 'z';
+            break;
+
+        case E_KALE.kmc:
+            endabikaZange.omwezi = E_MWEZ.m;
+            endabikaZange.olunaku = E_LUNA.b;
+            endabikaZange.omwaka = E_MWAK.b;
+            endabikaZange.enjawula = 'k';
+            endabikaZange.nnyimpi = true;
+            break;
+
+        case E_KALE.klc:
+            endabikaZange.omwezi = E_MWEZ.l;
+            endabikaZange.olunaku = E_LUNA.b;
+            endabikaZange.omwaka = E_MWAK.b;
+            endabikaZange.enjawula = 'k';
+            endabikaZange.nnyimpi = true;
+            break;
+
+        case E_KALE.kbc:
+            endabikaZange.omwezi = E_MWEZ.b;
+            endabikaZange.olunaku = E_LUNA.b;
+            endabikaZange.omwaka = E_MWAK.b;
+            endabikaZange.enjawula = 'k';
+            endabikaZange.nnyimpi = true;
+            break;
+
+        case E_KALE.kmss:
+            endabikaZange.omwezi = E_MWEZ.ms;
+            endabikaZange.olunaku = E_LUNA.m;
+            endabikaZange.omwaka = E_MWAK.ms;
+            endabikaZange.enjawula = 't';
+            endabikaZange.nnyimpi = true;
+            break;
+
+        case E_KALE.klss:
+            endabikaZange.omwezi = E_MWEZ.ls;
+            endabikaZange.olunaku = E_LUNA.m;
+            endabikaZange.omwaka = E_MWAK.ms;
+            endabikaZange.enjawula = 't';
+            endabikaZange.nnyimpi = true;
+            break;
+
+        case E_KALE.kbss:
+            endabikaZange.omwezi = E_MWEZ.bs;
+            endabikaZange.olunaku = E_LUNA.m;
+            endabikaZange.omwaka = E_MWAK.ms;
+            endabikaZange.enjawula = 't';
+            endabikaZange.nnyimpi = true;
+            break;
+
+        default:
+            throw new Error('endabika temanyiddwa');
+    }
+
+    return endabikaZange;
+};
+
+// sengeka endabika okusinziila ebyokwelobozesaako
+funaEbiseela = (obu, eky) => {
+
+    if (!(eky.endabika in ENDABIKA.KALENDA)) {
+        throw new Error('endabika ya ebiseela temanyiddwa');
+    } else {
+
+        // gyamu okweloboza ku lunaku
+        let end = funaEbyokwelobozesaakoEbyenjawulo(eky.endabika);
+
+        let enzingu = funaEnzingu(obu.enzingu, end.enzingu),
+            olunaku = funaOlunaku(obu.olunaku, end.olunaku),
+            omwezi = funaOmwezi(obu.omwezi, end.omwezi),
+            omwaka = funaOmwaka(obu.omwaka, end.omwaka),
+            akawula;
+
+        if (!end.nnyimpi) {
+            if (eky.akagata === '') {
+                if (end.olunaku === E_LUNA.b || end.omwaka === E_MWAK.b || end.omwaka === E_MWAK.bs) {
+                    return `${enzingu}, ${olunaku}, ${omwezi}, ${omwaka}`;
+                } else {
+                    return `${enzingu} ${olunaku} ${omwezi}, ${omwaka}`;
+                }
+            } else {
+                return `${enzingu}${eky.akagata}${olunaku} ${omwezi}${eky.akagata}${omwaka}`;
+            }
+        } else {
+            if (eky.akagata === '') {
+                akawula = end.enjawula === 't' ? '/' : end.enjawula === 'z' ? '-' : end.enjawula === 'k' ? ', ' : ' ';
+                return `${olunaku}${akawula}${omwezi}${akawula}${omwaka}`;
+            } else {
+                return `${olunaku}${eky.akagata}${omwezi}${eky.akagata}${omwaka}`;
+            }
+        }
+    }
+};
+
+// funa eddakiika mu bigambo
+funaEssaawaObaEddakiikaObaMuBigambo = (nnam = 0) => {
+    let makumi, kkumi;
+    if (nnam == 0) {
+        return '';
+    } else if (nnam == 1) {
+        return 'emu';
+    } else if (nnam < 10) {
+        return `${ENNYINGO_EZA_OMWAKA.eyokunna[nnam-1]}`;
+    } else if (nnam < 60) {
+        makumi = parseInt(`${nnam}`.charAt(0), 10);
+        kkumi = parseInt(`${nnam}`.charAt(1), 10);
+        return `${ENNYINGO_EZA_OMWAKA.eyokusatu[makumi-1]}${makumi == 1 ? NNALUGANDA.NA : NNALUGANDA.MU}${ENNYINGO_EZA_OMWAKA.eyokunna[kkumi-1]}`;
+    } else {
+        throw new Error('eddakiika oba obutikitiki tebilina kusukka 60');
+    }
+};
+
+// funa obutikitiki mu bigambo
+funaObutiktikiMuBigambo = (nnam = 0) => {
+    let makumi, kkumi;
+    if (nnam === 0) {
+        return '';
+    } else if (nnam < 10) {
+        return `${EMBALA_EYA_OBUTIKITIKI[nnam-1]}`;
+    } else if (nnam < 60) {
+        makumi = parseInt(`${nnam}`.charAt(0), 10);
+        kkumi = parseInt(`${nnam}`.charAt(1), 10);
+        return `${ENNYINGO_EZA_OMWAKA.eyokusatu[makumi-1]}${makumi == 1 ? NNALUGANDA.NA : NNALUGANDA.MU}${EMBALA_EYA_OBUTIKITIKI[kkumi-1]}`;
+    } else {
+        throw new Error('eddakiika oba obutikitiki tebilina kusukka 60');
+    }
+};
+
+// funa essaawa mu bigambo okusinziila kundbika
+mpaEssaawaMuBigambo = (ess, end) => {
+
+    let eddakiika, akatikitiki, sekonda, dakiika, katikit,
+        essaawa = funaEssaawa(ess.essaawa, end.endsawa),
+        ekigelo = end.endkige === '' ? '' : ` ${NNALUGANDA.EZA} ${funaEkigelo(ess.essaawa, end.endkige)}`,
+        sawa = end.endsawa === E_SAWA.b ? `essaawa ${end.endsawa === E_SAWA.b ? NNALUGANDA.EYA : NNALUGANDA.EZA} ` : 'essaawa ';
+
+    if (end.endbuwa === 'sss') {
+        if (end.eddakiika == 30) {
+            return `${essaawa} kitundu`;
+        } else {
+            eddakiika = funaEssaawaObaEddakiikaObaMuBigambo(ess.eddakiika);
+            return `${essaawa} ${eddakiika}`.trim();
+        }
+    } else if (end.endbuwa === 'ss') {
+        return `${sawa}${essaawa}${ekigelo}`;
+    } else if (end.endbuwa === 's') {
+        dakiika = ess.eddakiika == 0 ? '' : ess.eddakiika == 30 ? ` ${NNALUGANDA.NE} ekitundu` : ` ${NNALUGANDA.NE} eddakiika ${funaEssaawaObaEddakiikaObaMuBigambo(ess.eddakiika)}`;
+        return `${sawa}${essaawa}${ekigelo}${dakiika}`.trim();
+    } else {
+        akatikitiki = funaObutiktikiMuBigambo(ess.akatikitiki);
+        sekonda = ess.akatikitiki == 1 ? 'akatikitiki' : 'obutikitiki';
+        dakiika = ess.eddakiika == 0 ? '' : ess.eddakiika == 30 ? ` ${NNALUGANDA.NE} ekitundu` : ` ${NNALUGANDA.NE} eddakiika ${funaEssaawaObaEddakiikaObaMuBigambo(ess.eddakiika)}`;
+        katikit = akatikitiki === '' ? '' : ` ${NNALUGANDA.NE} ${sekonda} ${akatikitiki}`;
+        return `${sawa}${essaawa}${ekigelo}${dakiika}${katikit}`;
+    }
+};
+
+// funa essaawa mu bigambo
+funaEssaawaMuBigambo = (ess, end = 'cmk') => {
+    // obuwanvu
+    // '': SW:DKK:KTKTK
+    // 's': SW:DKK
+    // 'ss': SW
+
+    switch (end) {
+        case E_KATI.cmk:
+            return mpaEssaawaMuBigambo(ess, {
+                endsawa: E_SAWA.m,
+                endkige: E_KIGE.k,
+                endbuwa: ''
+            });
+        case E_KATI.cmks:
+            return mpaEssaawaMuBigambo(ess, {
+                endsawa: E_SAWA.m,
+                endkige: E_KIGE.k,
+                endbuwa: 's'
+            });
+        case E_KATI.cmkss:
+            return mpaEssaawaMuBigambo(ess, {
+                endsawa: E_SAWA.m,
+                endkige: E_KIGE.k,
+                endbuwa: 'ss'
+            });
+        case E_KATI.cmn:
+            return mpaEssaawaMuBigambo(ess, {
+                endsawa: E_SAWA.m,
+                endkige: E_KIGE.n,
+                endbuwa: ''
+            });
+        case E_KATI.cmns:
+            return mpaEssaawaMuBigambo(ess, {
+                endsawa: E_SAWA.m,
+                endkige: E_KIGE.n,
+                endbuwa: 's'
+            });
+        case E_KATI.cmnss:
+            return mpaEssaawaMuBigambo(ess, {
+                endsawa: E_SAWA.m,
+                endkige: E_KIGE.n,
+                endbuwa: 'ss'
+            });
+        case E_KATI.cmt:
+            return mpaEssaawaMuBigambo(ess, {
+                endsawa: E_SAWA.m,
+                endkige: E_KIGE.t,
+                endbuwa: ''
+            });
+        case E_KATI.cmts:
+            return mpaEssaawaMuBigambo(ess, {
+                endsawa: E_SAWA.m,
+                endkige: E_KIGE.t,
+                endbuwa: 's'
+            });
+        case E_KATI.cmtss:
+            return mpaEssaawaMuBigambo(ess, {
+                endsawa: E_SAWA.m,
+                endkige: E_KIGE.t,
+                endbuwa: 'ss'
+            });
+
+        case E_KATI.cb:
+            return mpaEssaawaMuBigambo(ess, {
+                endsawa: E_SAWA.b,
+                endkige: '',
+                endbuwa: ''
+            });
+        case E_KATI.cbs:
+            return mpaEssaawaMuBigambo(ess, {
+                endsawa: E_SAWA.b,
+                endkige: '',
+                endbuwa: 's'
+            });
+        case E_KATI.cbss:
+            return mpaEssaawaMuBigambo(ess, {
+                endsawa: E_SAWA.b,
+                endkige: '',
+                endbuwa: 'ss'
+            });
+        case E_KATI.cbsm:
+            return mpaEssaawaMuBigambo(ess, {
+                endsawa: E_SAWA.b,
+                endkige: '',
+                endbuwa: 'sss'
+            });
+
+        default:
+            throw new Error('endabika temanyiddwa oba tekilizibwa');
+    }
+};
+
+// gatako zzeelo
+gatakoZzeelo = (nnam) => {
+    if (typeof nnam === 'string') {
+        return nnam.length === 1 ? `0${nnam}` : nnam;
+    } else if (typeof nnam === 'number' && nnam >= 0 && nnam < 100) {
+        return nnam < 10 ? `0${nnam}` : `${nnam}`;
+    } else {
+        return nnam;
+    }
+};
+
+// funa essaawa mu nnamba okusinziila kundbika
+mpaEssaawaMuNnamba = (ess, end) => {
+
+    let eddakiika, akatikitiki, ekigelo,
+        essaawa = funaEssaawa(ess.essaawa, end.endsawa);
+
+    essaawa = !end.endgtzl ? essaawa : gatakoZzeelo(essaawa);
+
+    if (end.endbuwa === 'sss') {
+        ekigelo = funaEkigelo(ess.essaawa, end.endkige);
+        return `${essaawa} ${NNALUGANDA.EZ}${ekigelo}`;
+    } else if (end.endbuwa === 'ss') {
+        return `${essaawa}`;
+    } else if (end.endbuwa === 's') {
+        eddakiika = !end.endgtzl ? `${ess.eddakiika}` : gatakoZzeelo(ess.eddakiika);
+        return `${essaawa}:${eddakiika}`;
+    } else {
+        eddakiika = !end.endgtzl ? `${ess.eddakiika}` : gatakoZzeelo(ess.eddakiika);
+        akatikitiki = !end.endgtzl ? `${ess.akatikitiki}` : gatakoZzeelo(ess.akatikitiki);
+        return `${essaawa}:${eddakiika}:${akatikitiki}`;
+    }
+};
+
+// funa essaawa mu nnamba
+funaEssaawaMuNnamba = (ess, end = 'm') => {
+    // obuwanvu
+    // '': SW:DKK:KTKTK
+    // 's': SW:DKK
+    // 'ss': SW
+    // 'sss': SW KGL
+
+    switch (end) {
+
+        case E_KATI.m:
+            return mpaEssaawaMuNnamba(ess, {
+                endsawa: E_SAWA.ms,
+                endkige: '',
+                endbuwa: '',
+                endgtzl: false
+            });
+
+        case E_KATI.ms:
+            return mpaEssaawaMuNnamba(ess, {
+                endsawa: E_SAWA.ms,
+                endkige: '',
+                endbuwa: 's',
+                endgtzl: false
+            });
+
+        case E_KATI.mss:
+            return mpaEssaawaMuNnamba(ess, {
+                endsawa: E_SAWA.ms,
+                endkige: '',
+                endbuwa: 'ss',
+                endgtzl: false
+            });
+
+        case E_KATI.mkss:
+            return mpaEssaawaMuNnamba(ess, {
+                endsawa: E_SAWA.ms,
+                endkige: E_KIGE.k,
+                endbuwa: 'sss',
+                endgtzl: false
+            });
+
+        case E_KATI.mnss:
+            return mpaEssaawaMuNnamba(ess, {
+                endsawa: E_SAWA.ms,
+                endkige: E_KIGE.n,
+                endbuwa: 'sss',
+                endgtzl: false
+            });
+
+        case E_KATI.mtss:
+            return mpaEssaawaMuNnamba(ess, {
+                endsawa: E_SAWA.ms,
+                endkige: E_KIGE.t,
+                endbuwa: 'sss',
+                endgtzl: false
+            });
+
+        case E_KATI.mz:
+            return mpaEssaawaMuNnamba(ess, {
+                endsawa: E_SAWA.ms,
+                endkige: '',
+                endbuwa: '',
+                endgtzl: true
+            });
+
+        case E_KATI.msz:
+            return mpaEssaawaMuNnamba(ess, {
+                endsawa: E_SAWA.ms,
+                endkige: '',
+                endbuwa: 's',
+                endgtzl: true
+            });
+
+        case E_KATI.mssz:
+            return mpaEssaawaMuNnamba(ess, {
+                endsawa: E_SAWA.ms,
+                endkige: '',
+                endbuwa: 'ss',
+                endgtzl: true
+            });
+
+        case E_KATI.pz:
+            return mpaEssaawaMuNnamba(ess, {
+                endsawa: E_SAWA.ps,
+                endkige: '',
+                endbuwa: '',
+                endgtzl: true
+            });
+
+        case E_KATI.psz:
+            return mpaEssaawaMuNnamba(ess, {
+                endsawa: E_SAWA.ps,
+                endkige: '',
+                endbuwa: 's',
+                endgtzl: true
+            });
+
+        case E_KATI.pssz:
+            return mpaEssaawaMuNnamba(ess, {
+                endsawa: E_SAWA.ps,
+                endkige: '',
+                endbuwa: 'ss',
+                endgtzl: true
+            });
+
+        default:
+            throw new Error('endabika temanyiddwa oba tekilizibwa');
+    }
+};
+
+// funa kati
+funaMeka = (ess, eky) => {
+    if (ess.essaawa > 23 || ess.essaawa < 0) {
+        throw new Error('essaawa ezikilizibwa zilina okuva ku 0 paka 23');
+    } else if (ess.eddakiika > 60 || ess.eddakiika < 0) {
+        throw new Error('eddakiika ezikilizibwa zilina okuva ku 0 paka 59');
+    } else if (ess.akatikitiki > 60 || ess.akatikitiki < 0) {
+        throw new Error('obutikitiki obukilizibwa bulina okuva ku 0 paka 59');
+    } else if (!(eky.endabika in ENDABIKA.KATI)) {
+        throw new Error('endabika ya essaawa temanyiddwa');
+    } else {
+        if (eky.endabika.charAt(0) === 'c') {
+            return funaEssaawaMuBigambo(ess, eky.endabika);
+        } else {
+            return funaEssaawaMuNnamba(ess, eky.endabika);
+        }
     }
 };
 
@@ -1327,329 +2066,84 @@ funaEbyokwelobozesaakoEbisuubilwa = (ebyokwelobozesaako) => {
     return $.extend({}, $.ebiseelaNeEssaawa.ebyokwelobozesaako, ebyokwelobozesaako);
 };
 
-/*
-// funa ebyokwelobozesaako ebisuubilwa
-funaEbyokwelobozesaakoEbisuubilwa = (ebyokwelobozesaako) => {
-    let eby = $.extend({}, $.ebiseelaNeEssaawa.ebyokwelobozesaako, ebyokwelobozesaako);
-    // zza endabika yonna mu nyukuta entono kubanga zezimanyiddwa
-    eby.endabika = eby.endabika.toLowerCase();
-    return eby;
-};
-*/
+/* 
+ * plugin methods
+ */
 
-// funa endabika okusinziira ku ebyokwelobozesaako
-funaEndabikaKuBiseela = (eby) => {
-    if (eby.akagata === '') {
-        return `${eby.enzingu} ${eby.olunaku} ${eby.omwezi}, ${eby.omwaka}`;
-    } else {
-        return `${eby.enzingu}${eby.akagata}${eby.olunaku} ${eby.omwezi}${eby.akagata}${eby.omwaka}`;
-    }
-}
+/**** ennaku za omwezi ****/
 
-// funa endabika okusinziira ku ebyokwelobozesaako
-funaEndabikaKuBiseelaMuBufunze1 = (eby) => {
-    if (eby.akagata === '') {
-        return `${eby.olunaku} ${eby.omwezi} ${eby.omwaka}`;
-    } else {
-        return `${eby.olunaku}${eby.akagata}${eby.omwezi}${eby.akagata}${eby.omwaka}`;
-    }
-}
-
-// funa endabika okusinziira ku ebyokwelobozesaako
-funaEndabikaKuBiseelaMuBufunze2 = (eby) => {
-    if (eby.akagata === '') {
-        return `${eby.olunaku}-${eby.omwezi}-${eby.omwaka}`;
-    } else {
-        return `${eby.olunaku}${eby.akagata}${eby.omwezi}${eby.akagata}${eby.omwaka}`;
-    }
-}
-
-// gyamu okwelobozesa ku lunaku
-gyamuOkwelobozaKuOlunaku = (eky) => {
-    switch (eky) {
-        case E_KALE.ma:
-        case E_KALE.msa:
-        case E_KALE.ba:
-        case E_KALE.bsa:
-        case E_KALE.la:
-        case E_KALE.lsa:
-        case E_KALE.ea:
-        case E_KALE.esa:
-        case E_KALE.msda:
-        case E_KALE.msma:
-        case E_KALE.bsda:
-        case E_KALE.bsma:
-        case E_KALE.lsda:
-        case E_KALE.lsma:
-        case E_KALE.kma:
-        case E_KALE.kla:
-        case E_KALE.kba:
-        case E_KALE.kmsa:
-        case E_KALE.klsa:
-        case E_KALE.kbsa:
-            return {
-                endabika: eky.replace('a', ''),
-                ennakuMuBigambo: true
-            };
-        default:
-            return {
-                endabika: eky,
-                ennakuMuBigambo: false
-            };
-    }
-}
-
-// sengeka endabika okusinziira ebyokwelobozesaako
-sengekaEbyokwelobozesaakoKuBiseela = (obu, eky) => {
-console.log(obu, eky);
-    if (!(eky.endabika in ENDABIKA.KALENDA)) {
-        throw new Error('endabika ya ebiseela temanyiddwa');
-    } else {
-
-        // gyamu okweloboza ku lunaku
-        let ekyEmpya = gyamuOkwelobozaKuOlunaku(eky.endabika);
-        console.log(ekyEmpya);
-        let enzingu,
-            ezooba,
-            akagata = eky.akagata,
-            // funa oluna mu bigambo
-            olunaku = ekyEmpya.ennakuMuBigambo ? ENNAKU_ZA_OMWEZI[obu.olunaku-1] : obu.olunaku ;
-
-        switch (ekyEmpya.endabika) {
-            case E_KALE.m:
-            case E_KALE.ms:
-            case E_KALE.b:
-            case E_KALE.bs:
-            case E_KALE.l:
-            case E_KALE.ls:
-            case E_KALE.e:
-            case E_KALE.es:
-                enzingu = funaEnzingu(obu.enzingu, ekyEmpya.endabika);
-                ezooba = funaAmazooba(obu.omwezi, ekyEmpya.endabika);
-
-                return funaEndabikaKuBiseela({
-                    omwaka: obu.omwaka,
-                    omwezi: ezooba,
-                    olunaku: olunaku,
-                    enzingu: enzingu,
-                    akagata: akagata
-                });
-
-            case E_KALE.msd:
-                enzingu = funaEnzingu(obu.enzingu, E_LUNA.ms);
-                ezooba = funaAmazooba(obu.omwezi, E_MWEZ.m);
-
-                return funaEndabikaKuBiseela({
-                    omwaka: obu.omwaka,
-                    omwezi: ezooba,
-                    olunaku: olunaku,
-                    enzingu: enzingu,
-                    akagata: akagata
-                });
-
-            case E_KALE.msm:
-                enzingu = funaEnzingu(obu.enzingu, E_LUNA.m);
-                ezooba = funaAmazooba(obu.omwezi, E_MWEZ.ms);
-
-                return funaEndabikaKuBiseela({
-                    omwaka: obu.omwaka,
-                    omwezi: ezooba,
-                    olunaku: olunaku,
-                    enzingu: enzingu,
-                    akagata: akagata
-                });
-
-            case E_KALE.bsd:
-                enzingu = funaEnzingu(obu.enzingu, E_LUNA.bs);
-                ezooba = funaAmazooba(obu.omwezi, E_MWEZ.b);
-
-                return funaEndabikaKuBiseela({
-                    omwaka: obu.omwaka,
-                    omwezi: ezooba,
-                    olunaku: olunaku,
-                    enzingu: enzingu,
-                    akagata: akagata
-                });
-
-            case E_KALE.bsm:
-                enzingu = funaEnzingu(obu.enzingu, E_LUNA.b);
-                ezooba = funaAmazooba(obu.omwezi, E_MWEZ.bs);
-
-                return funaEndabikaKuBiseela({
-                    omwaka: obu.omwaka,
-                    omwezi: ezooba,
-                    olunaku: olunaku,
-                    enzingu: enzingu,
-                    akagata: akagata
-                });
-
-            case E_KALE.lsd:
-                enzingu = funaEnzingu(obu.enzingu, E_LUNA.ls);
-                ezooba = funaAmazooba(obu.omwezi, E_MWEZ.l);
-
-                return funaEndabikaKuBiseela({
-                    omwaka: obu.omwaka,
-                    omwezi: ezooba,
-                    olunaku: olunaku,
-                    enzingu: enzingu,
-                    akagata: akagata
-                });
-
-            case E_KALE.lsm:
-                enzingu = funaEnzingu(obu.enzingu, E_LUNA.l);
-                ezooba = funaAmazooba(obu.omwezi, E_MWEZ.ls);
-
-                return funaEndabikaKuBiseela({
-                    omwaka: obu.omwaka,
-                    omwezi: ezooba,
-                    olunaku: olunaku,
-                    enzingu: enzingu,
-                    akagata: akagata
-                });
-
-            case E_KALE.km:
-                ezooba = funaAmazooba(obu.omwezi, E_MWEZ.m);
-
-                return funaEndabikaKuBiseelaMuBufunze1({
-                    omwaka: obu.omwaka,
-                    omwezi: ezooba,
-                    olunaku: olunaku,
-                    akagata: akagata
-                });
-
-            case E_KALE.kl:
-                ezooba = funaAmazooba(obu.omwezi, E_MWEZ.l);
-
-                return funaEndabikaKuBiseelaMuBufunze1({
-                    omwaka: obu.omwaka,
-                    omwezi: ezooba,
-                    olunaku: olunaku,
-                    akagata: akagata
-                });
-
-            case E_KALE.kb:
-                ezooba = funaAmazooba(obu.omwezi, E_MWEZ.b);
-
-                return funaEndabikaKuBiseelaMuBufunze1({
-                    omwaka: obu.omwaka,
-                    omwezi: ezooba,
-                    olunaku: olunaku,
-                    akagata: akagata
-                });
-
-            case E_KALE.kms:
-                ezooba = funaAmazooba(obu.omwezi, E_MWEZ.ms);
-
-                return funaEndabikaKuBiseelaMuBufunze2({
-                    omwaka: obu.omwaka,
-                    omwezi: ezooba,
-                    olunaku: olunaku,
-                    akagata: akagata
-                });
-
-            case E_KALE.kls:
-                ezooba = funaAmazooba(obu.omwezi, E_MWEZ.ls);
-
-                return funaEndabikaKuBiseelaMuBufunze2({
-                    omwaka: obu.omwaka,
-                    omwezi: ezooba,
-                    olunaku: olunaku,
-                    akagata: akagata
-                });
-
-            case E_KALE.kbs:
-                ezooba = funaAmazooba(obu.omwezi, E_MWEZ.bs);
-
-                return funaEndabikaKuBiseelaMuBufunze2({
-                    omwaka: obu.omwaka,
-                    omwezi: ezooba,
-                    olunaku: olunaku,
-                    akagata: akagata
-                });
-
-            default:
-                throw new Error('endabika temanyidwa');
-        }
-    }
-};
-
-// sengeka endabika okusinziira ebyokwelobozesaako
-sengekaEbyokwelobozesaakoKuSsaawa = (ess, eky) => {
-
-    if ((eky.endabika in ENDABIKA.ESSAAWA) === false) {
-        throw new Error('endabika ya essaawa temanyiddwa');
-    } else {
-
-        let sawayange = funaEssaawa(ess.essaawa, eky.endabika),
-            akagambo = eky.akagambo === '' ? funaAkagamboAkagata(sawayange, eky.endabika) : eky.akagambo,
-            endab = '';
-
-        if (eky.obufunze === 'e') {
-            // funa essaawa, eddakiika byokka  
-            sawayange = `${sawayange}:${ess.eddakiika}`;
-        } else if (eky.obufunze === 'ee') {
-            // funa essaawa zokka
-            sawayange = `${sawayange}`;
-        } else {
-            // funa essaawa, eddakiika ne akatikitiki
-            sawayange = `${sawayange}:${ess.eddakiika}:${ess.akatikitiki}`;
-        }
-
-        switch (eky.endabika) {
-            case E_KATI.m:
-            case E_KATI.ms:
-            case E_KATI.b:
-            case E_KATI.bs:
-            case E_KATI.p:
-            case E_KATI.ps:
-                return sawayange;
-
-            case E_KATI.mk:
-            case E_KATI.mks:
-            case E_KATI.bk:
-            case E_KATI.bks:
-                endab = funaEkigelo(sawayange, E_KIGE.k);
-                return `${sawayange}${akagambo}${endab}`;
-
-            case E_KATI.mn:
-            case E_KATI.mns:
-            case E_KATI.bn:
-            case E_KATI.bns:
-                endab = funaEkigelo(sawayange, E_KIGE.n);
-                return `${sawayange}${akagambo}${endab}`;
-
-            case E_KATI.mt:
-            case E_KATI.mts:
-            case E_KATI.bt:
-            case E_KATI.bts:
-                endab = funaEkigelo(sawayange, E_KIGE.t);
-                return `${sawayange}${akagambo}${endab}`;
-
-            default:
-                throw new Error('endabika ya essaawa temanyiddwa');
-        }
-    }
-};
-
-$.ebiseelaNeEssaawa.leero = (ebyokwelobozesaako) => {
+$.ebiseelaNeEssaawa.olwaleelo = (ebyokwelobozesaako) => {
 
     let obudde = new Date(),
-        olunakuLwaWiiki = obudde.getDay(),
-        olunakuLwaOmwezi = obudde.getDate(),
+        enzing = obudde.getDay(),
+        olunak = obudde.getDate(),
         omwezi = obudde.getMonth(),
         omwaka = obudde.getFullYear();
 
     ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
 
-    return sengekaEbyokwelobozesaakoKuBiseela({
-        enzingu: olunakuLwaWiiki,
-        olunaku: olunakuLwaOmwezi,
+    return funaEbiseela({
+        enzingu: enzing,
+        olunaku: olunak,
         omwezi: omwezi,
         omwaka: omwaka
     }, ebyokwelobozesaako);
 };
 
-$.ebiseelaNeEssaawa.kaati = (ebyokwelobozesaako) => {
+$.ebiseelaNeEssaawa.obudde = (budde) => {
+
+    // funa enzingu okuva mu biseela ebilala bweba teweleddwa
+    let enzingua = (!budde.enzingu || !budde.enzingu.a ? (new Date(budde.omwaka.a, budde.omwezi.a, budde.olunaku.a)).getDay() : budde.enzingu.a),
+        enzingub = !budde.enzingu || !budde.enzingu.b ? E_KALE.m : budde.enzingu.b;
+
+    return {
+        enzingu: funaEnzingu(enzingua, enzingub),
+        olunaku: funaOlunaku(budde.olunaku.a, budde.olunaku.b),
+        omwezi: funaOmwezi(budde.omwezi.a, budde.omwezi.b),
+        omwaka: funaOmwaka(budde.omwaka.a, budde.omwaka.b)
+    };
+};
+
+$.ebiseelaNeEssaawa.ekiseela = (kiseela, ebyokwelobozesaako) => {
+
+    ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
+
+    return funaEbiseela({
+        enzingu: (!kiseela.enzingu ? (new Date(kiseela.omwaka, kiseela.omwezi, kiseela.olunaku)).getDay() : kiseela.enzingu),
+        olunaku: kiseela.olunaku,
+        omwezi: kiseela.omwezi,
+        omwaka: kiseela.omwaka
+    }, ebyokwelobozesaako);
+};
+
+$.ebiseelaNeEssaawa.omwezi = (mwezi, ebyokwelobozesaako) => {
+    ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
+    return funaOmwezi(mwezi, ebyokwelobozesaako.endabika);
+};
+
+$.ebiseelaNeEssaawa.enzingu = (nzingu, ebyokwelobozesaako) => {
+    ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
+    return funaEnzingu(nzingu, ebyokwelobozesaako.endabika);
+};
+
+$.ebiseelaNeEssaawa.olunaku = (lunaku, ebyokwelobozesaako) => {
+    ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
+    return funaOlunaku(lunaku, ebyokwelobozesaako.endabika);
+};
+
+$.ebiseelaNeEssaawa.olukulu = (mwezi, lunaku) => {
+    return funaOlunakuOlukulu(mwezi, lunaku);
+};
+
+$.ebiseelaNeEssaawa.omwaka = (nnam, ebyokwelobozesaako) => {
+    ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
+    return funaOmwaka(nnam, ebyokwelobozesaako.endabika);
+};
+
+/**** essaawa ****/
+
+// funna essawa kati
+$.ebiseelaNeEssaawa.kati = (ebyokwelobozesaako) => {
 
     ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
 
@@ -1658,67 +2152,44 @@ $.ebiseelaNeEssaawa.kaati = (ebyokwelobozesaako) => {
         eddakiika = sawa.getMinutes(),
         akatikitiki = sawa.getSeconds();
 
-    ebyokwelobozesaako.obufunze = '';
-    if (ebyokwelobozesaako.endabika.endsWith('e')) {
-        if (ebyokwelobozesaako.endabika.endsWith('ee')) {
-            // funa essaawa zokka
-            ebyokwelobozesaako.obufunze = 'ee';
-        } else {
-            // funa essaawa, eddakiika byokka  
-            ebyokwelobozesaako.obufunze = 'e'
-        }
-    }
-
-    // sosolamu 'e' zzonna okuva mundabika
-    ebyokwelobozesaako.endabika = ebyokwelobozesaako.endabika.replace('e', '');
-
-    return sengekaEbyokwelobozesaakoKuSsaawa({
+    return funaMeka({
         essaawa: sawayange,
         eddakiika: eddakiika,
         akatikitiki: akatikitiki
     }, ebyokwelobozesaako);
 };
 
-$.ebiseelaNeEssaawa.ekiseela = (omwaka, omwezi, olunaku, ebyokwelobozesaako) => {
+// funna essawa kati
+$.ebiseelaNeEssaawa.meka = (saawa, ebyokwelobozesaako) => {
 
     ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
 
-    let obudde = new Date(omwaka, omwezi, olunaku),
-        olunakuLwaWiiki = obudde.getDay() - 1; // ttoolako olunaku lumu kubanga tutandikira kubalira to zzeelo
-
-    return sengekaEbyokwelobozesaakoKuBiseela({
-        enzingu: olunakuLwaWiiki,
-        olunaku: olunaku,
-        omwezi: omwezi,
-        omwaka: omwaka
+    return funaMeka({
+        essaawa: saawa.essaawa,
+        eddakiika: saawa.eddakiika,
+        akatikitiki: saawa.akatikitiki
     }, ebyokwelobozesaako);
 };
 
-$.ebiseelaNeEssaawa.omwezi = (nnam, ebyokwelobozesaako) => {
+// funa essaawa
+$.ebiseelaNeEssaawa.essaawa = (saawa, ebyokwelobozesaako) => {
     ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
-    return funaAmazooba(nnam, ebyokwelobozesaako.endabika);
-};
-
-$.ebiseelaNeEssaawa.olunaku = (nnam, ebyokwelobozesaako) => {
-    ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
-    return funaEnzingu(nnam, ebyokwelobozesaako.endabika);
-};
-
-$.ebiseelaNeEssaawa.essaawa = (nnam, ebyokwelobozesaako) => {
-    ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
-    return funaEssaawa(nnam, ebyokwelobozesaako.endabika);
-};
-
-$.ebiseelaNeEssaawa.ekigelo = (nnam, ebyokwelobozesaako) => {
-    ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
-
-    if ((ebyokwelobozesaako.endabika in ENDABIKA.EKIGELO) === false) {
-        throw new Error('endabika ya ekigelo temanyiddwa');
+    if (ebyokwelobozesaako.endabika === E_SAWA.msz) {
+        return gatakoZzeelo(funaEssaawa(saawa, E_SAWA.ms));
+    } else if (ebyokwelobozesaako.endabika === E_SAWA.psz) {
+        return gatakoZzeelo(funaEssaawa(saawa, E_SAWA.ps));
     } else {
-        return funaEkigelo(nnam, ebyokwelobozesaako.endabika);
+        return funaEssaawa(saawa, ebyokwelobozesaako.endabika);
     }
 };
 
+// funa ekigelo kya essaawa
+$.ebiseelaNeEssaawa.ekigelo = (saawa, ebyokwelobozesaako) => {
+    ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
+    return funaEkigelo(saawa, ebyokwelobozesaako.endabika);
+};
+
+// ebyokwelobozesaako ebikilizibwa
 $.ebiseelaNeEssaawa.ebyokwelobozesaako = {
     endabika: 'm',
     akagata: '',

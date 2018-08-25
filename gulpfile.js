@@ -7,30 +7,43 @@ const $ = gulpLoadPlugins();
 
 let dev = true;
 
-gulp.task('scripts', () => {
-  return gulp.src('src/*.js')
-    .pipe($.plumber())
-    .pipe($.if(dev, $.sourcemaps.init()))
-    .pipe($.babel())
-    //.pipe($.uglify({compress: {drop_console: true}}))
-    .pipe($.if(dev, $.sourcemaps.write('.')))
-    //.pipe($.rename({suffix: ".min"}))
-    .pipe(gulp.dest('dist'));
+gulp.task('transpile', () => {
+    return gulp.src('src/*.js')
+        .pipe($.plumber())
+        .pipe($.babel())
+        .pipe(gulp.dest('.tmp'));
+});
+
+gulp.task('compress', () => {
+    return gulp.src('.tmp/*.js')
+        .pipe($.if(dev, $.sourcemaps.init()))
+        .pipe($.uglify({
+            compress: {
+                drop_console: true
+            }
+        }))
+        .pipe($.if(dev, $.sourcemaps.write('.')))
+        .pipe($.rename({
+            suffix: ".min"
+        }))
+        .pipe(gulp.dest('dist'));
 });
 
 function lint(files) {
-  return gulp.src(files)
-    .pipe($.eslint({ fix: true }))
-    .pipe($.eslint.format());
+    return gulp.src(files)
+        .pipe($.eslint({
+            fix: true
+        }))
+        .pipe($.eslint.format());
 }
 
 gulp.task('lint', () => {
-  return lint('src/*.js')
-    .pipe(gulp.dest('src'));
+    return lint('src/*.js')
+        .pipe(gulp.dest('src'));
 });
 gulp.task('lint:test', () => {
-  return lint('test/**/*.js')
-    .pipe(gulp.dest('test'));
+    return lint('test/**/*.js')
+        .pipe(gulp.dest('test'));
 });
 
-gulp.task('clean', del.bind(null, ['dist']));
+gulp.task('clean', del.bind(null, ['dist', '.tmp']));
