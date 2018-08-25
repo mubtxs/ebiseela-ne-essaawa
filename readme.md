@@ -1,12 +1,3 @@
-# ebiseela-ne-essaawa [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> 
-
-## Installation
-
-```sh
-$ npm install --save ebiseela-ne-essaawa
-```
-
 ## Usage
 
 Get the date today
@@ -32,11 +23,3 @@ let kati = $.ebiseelaNeEssaawa.kati({
 ## License
 
 MIT © [mubtxs](https://github.com/mubtxs)
-
-
-[npm-image]: https://badge.fury.io/js/ebiseela-ne-essaawa.svg
-[npm-url]: https://npmjs.org/package/ebiseela-ne-essaawa
-[travis-image]: https://travis-ci.org/mubtxs/ebiseela-ne-essaawa.svg?branch=master
-[travis-url]: https://travis-ci.org/mubtxs/ebiseela-ne-essaawa
-[daviddm-image]: https://david-dm.org/mubtxs/ebiseela-ne-essaawa.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/mubtxs/ebiseela-ne-essaawa
