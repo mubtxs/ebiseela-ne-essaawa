@@ -30,7 +30,11 @@ $.fn.ebiseelaNeEssaawa = (...x) => {
     return $.ebiseelaNeEssaawa.fn[method].apply(this, args);
 };
 
-// endabika ezikirizibwa
+/**** Constants ****/
+
+/** 
+ * Endabika ezikirizibwa
+ */ 
 const ENDABIKA = {
     // endabika za emyezi ne omwaka
     KALENDA: {
@@ -165,7 +169,9 @@ const ENDABIKA = {
     }
 };
 
-// ennaku za omwezi 
+/** 
+ * Ennaku za omwezi
+ */ 
 const ENNAKU_ZA_OMWEZI = [
     'lumu',
     'bbili',
@@ -200,7 +206,9 @@ const ENNAKU_ZA_OMWEZI = [
     'asatumulumu'
 ];
 
-// enyingo za omwaaka mu bigambo
+/** 
+ * Enyingo za omwaaka mu bigambo
+ */
 const ENNYINGO_EZA_OMWAKA = {
     essooka: [
         'lukumu',
@@ -248,7 +256,9 @@ const ENNYINGO_EZA_OMWAKA = {
     ]
 };
 
-// obutikitiki
+/** 
+ * Emanya ga obutikitiki
+ */
 const EMBALA_EYA_OBUTIKITIKI = [
     'kamu',
     'bubili',
@@ -261,7 +271,9 @@ const EMBALA_EYA_OBUTIKITIKI = [
     'mwenda'
 ];
 
-// akagambo akagata
+/** 
+ * Akagambo akagata
+ */ 
 const NNALUGANDA = {
     MU: 'mu',
     EZA: 'eza',
@@ -276,7 +288,9 @@ const NNALUGANDA = {
     Y: 'y' // y'
 };
 
-// endabika mu bufunze
+/** 
+ * Endabika mu bufunze
+ */
 const E_KALE = ENDABIKA.KALENDA,
     E_KATI = ENDABIKA.KATI,
     E_MWEZ = ENDABIKA.OMWEZI,
@@ -286,7 +300,9 @@ const E_KALE = ENDABIKA.KALENDA,
     E_MWAK = ENDABIKA.OMWAKA,
     E_KIGE = ENDABIKA.EKIGELO;
 
-/*
+/**** Data Methods ****/
+
+/**
  * Funa amazooba/emyezi ga omwaka
  *
  * akakolelo akawa amazooba ga omwaka okusinziila ku nbabika
@@ -570,7 +586,7 @@ funaOmwezi = (enu = 0, emp = 'b') => {
     }
 };
 
-/*
+/**
  * Funa enzingu/ennaku zza ddimansi/wiiki
  *
  * akakolelo akafuna enzingu/ennaku zza ddimansi/wiiki okusinziila ku nbabika
@@ -726,7 +742,7 @@ funaEnzingu = (enu = 0, emp = 'b') => {
     }
 };
 
-/*
+/**
  * Funa essaawa
  *
  * akakolelo akafuna essaawa okusinziila ku nbabika
@@ -1180,7 +1196,7 @@ funaEssaawa = (enu = 0, emp = 'b') => {
     }
 };
 
-/*
+/**
  * Funa ekigelo kya essaawa
  *
  * akakolelo akafuna ekigelo okusinziila ku nbabika
@@ -1192,7 +1208,7 @@ funaEssaawa = (enu = 0, emp = 'b') => {
  * @param {number} enu ennamba ya olunaku
  * @param {string} emp endabika ya olunaku
  * 
- * @return {string} essaawa
+ * @return {string} ekigelo kya essaawa
  */
 funaEkigelo = (enu = 0, emp = '') => {
     if (emp === E_KIGE.k) {
@@ -1206,19 +1222,12 @@ funaEkigelo = (enu = 0, emp = '') => {
     }
 };
 
-/*
+/**
  * Funa essaawa mu bibinja
- *
- * akakolelo akafuna essaawa mu bibinja okusinziila ku nbabika
- * Endabika ezikilizibwa:
- * - k: okusinziila ku mbala ya emisana ne ekilo
- * - n: okusinziila ku mbala ya olunaku lwona
- * - b: okusinziila ku bibeelawo
- *
- * @param {number} enu ennamba ya olunaku
- * @param {string} emp endabika ya olunaku
  * 
- * @return {string} essaawa
+ * @param {number} enu ennamba ya olunaku
+ * 
+ * @return {string} ekigelo kya essaawa
  */
 funaEkigeloKyaEssaawa = (enu) => {
     switch (enu) {
@@ -1265,7 +1274,13 @@ funaEkigeloKyaEssaawa = (enu) => {
     }
 };
 
-// akakolelo akafuna essaawa mu bibinja okusinziila ku biseela bya olunaku
+/** 
+ * Funa essaawa mu bibinja okusinziila ku biseela bya olunaku
+ * 
+ * @param {number} enu ennamba ya olunaku
+ * 
+ * @return {string} ekigelo kya essaawa
+ */
 funaEkigeloKyaEssaawaEkifunze = (enu) => {
     switch (enu) {
         case 20:
@@ -1305,7 +1320,13 @@ funaEkigeloKyaEssaawaEkifunze = (enu) => {
     }
 };
 
-// akakolelo akafuna essaawa mu bibinja okusinziila ku bitundu ebubili ebya olunaku
+/** 
+ * Funa essaawa mu bibinja okusinziila ku bitundu ebili ebya olunaku
+ * 
+ * @param {number} enu ennamba ya olunaku
+ * 
+ * @return {string} ekigelo kya essaawa
+ */
 funaEkitunduKyaOlunaku = (enu) => {
     switch (enu) {
         case 19:
@@ -1341,22 +1362,14 @@ funaEkitunduKyaOlunaku = (enu) => {
     }
 };
 
-// funa endabika ya olunaku 
-funaOlunaku = (olu = 0, end = 'm') => {
-    if (end === 'm') {
-        return `${olu}`;
-    } else if (end === 'z') {
-        if (olu < 10) {
-            return `0${olu}`;
-        } else {
-            return `${olu}`;
-        }
-    } else if (end === 'b') {
-        return ENNAKU_ZA_OMWEZI[olu - 1];
-    }
-};
-
-// ezimu ku nnaku enkulu mu mwaka
+/**
+ * Ezimu ku nnaku enkulu mu mwaka
+ * 
+ * @param {number} mwe omwezi
+ * @param {number} lun olunaku 
+ * 
+ * @return {string} elinya lya olunaku olukulu
+ */
 funaOlunakuOlukulu = (mwe = 0, lun = 0) => {
     let lunaku = `${mwe}-${lun}`;
 
@@ -1388,7 +1401,28 @@ funaOlunakuOlukulu = (mwe = 0, lun = 0) => {
     }
 };
 
-// omwaka mu bigambo
+/**** non-data methods ****/
+
+/**
+ * Funa endabika ya olunaku
+ */
+funaOlunaku = (olu = 0, end = 'm') => {
+    if (end === 'm') {
+        return `${olu}`;
+    } else if (end === 'z') {
+        if (olu < 10) {
+            return `0${olu}`;
+        } else {
+            return `${olu}`;
+        }
+    } else if (end === 'b') {
+        return ENNAKU_ZA_OMWEZI[olu - 1];
+    }
+};
+
+/** 
+ * Omwaka mu bigambo
+ */
 funaOmwakaMuBigambo = (omw = '0', emp = 'v') => {
 
     let obuwanvu = omw.length,
@@ -1463,7 +1497,9 @@ funaOmwakaMuBigambo = (omw = '0', emp = 'v') => {
     }
 };
 
-// funa omwaka mu bufunze
+/** 
+ * Funa omwaka mu bufunze
+ */
 funaOmwaka = (omw = 0, emp = 'm') => {
 
     // obuwanvu bwa omwaka
@@ -1498,7 +1534,9 @@ funaOmwaka = (omw = 0, emp = 'm') => {
     }
 };
 
-// funa esengaka ya ebiseela
+/** 
+ * Funa esengaka ya ebiseela
+ */
 funaEbyokwelobozesaakoEbyenjawulo = (end = 'm') => {
     let endabikaZange = {
         enzingu: E_ENZI.m,
@@ -1714,7 +1752,9 @@ funaEbyokwelobozesaakoEbyenjawulo = (end = 'm') => {
     return endabikaZange;
 };
 
-// sengeka endabika okusinziila ebyokwelobozesaako
+/** 
+ * Sengeka endabika okusinziila ku ebyokwelobozesaako
+ */
 funaEbiseela = (obu, eky) => {
 
     if (!(eky.endabika in ENDABIKA.KALENDA)) {
@@ -1751,7 +1791,9 @@ funaEbiseela = (obu, eky) => {
     }
 };
 
-// funa eddakiika mu bigambo
+/** 
+ * Funa eddakiika mu bigambo
+ */
 funaEssaawaObaEddakiikaObaMuBigambo = (nnam = 0) => {
     let makumi, kkumi;
     if (nnam == 0) {
@@ -1769,7 +1811,9 @@ funaEssaawaObaEddakiikaObaMuBigambo = (nnam = 0) => {
     }
 };
 
-// funa obutikitiki mu bigambo
+/** 
+ * Funa obutikitiki mu bigambo
+ */
 funaObutiktikiMuBigambo = (nnam = 0) => {
     let makumi, kkumi;
     if (nnam === 0) {
@@ -1785,7 +1829,9 @@ funaObutiktikiMuBigambo = (nnam = 0) => {
     }
 };
 
-// funa essaawa mu bigambo okusinziila kundbika
+/** 
+ * Funa essaawa mu bigambo okusinziila kundbika
+ */
 mpaEssaawaMuBigambo = (ess, end) => {
 
     let eddakiika, akatikitiki, sekonda, dakiika, katikit,
@@ -1814,7 +1860,9 @@ mpaEssaawaMuBigambo = (ess, end) => {
     }
 };
 
-// funa essaawa mu bigambo
+/** 
+ * Funa essaawa mu bigambo
+ */
 funaEssaawaMuBigambo = (ess, end = 'cmk') => {
     // obuwanvu
     // '': SW:DKK:KTKTK
@@ -1907,7 +1955,9 @@ funaEssaawaMuBigambo = (ess, end = 'cmk') => {
     }
 };
 
-// gatako zzeelo
+/** 
+ * Gatako zzeelo
+ */
 gatakoZzeelo = (nnam) => {
     if (typeof nnam === 'string') {
         return nnam.length === 1 ? `0${nnam}` : nnam;
@@ -1918,7 +1968,9 @@ gatakoZzeelo = (nnam) => {
     }
 };
 
-// funa essaawa mu nnamba okusinziila kundbika
+/** 
+ * Funa essaawa mu nnamba okusinziila kundbika
+ */
 mpaEssaawaMuNnamba = (ess, end) => {
 
     let eddakiika, akatikitiki, ekigelo,
@@ -1941,7 +1993,9 @@ mpaEssaawaMuNnamba = (ess, end) => {
     }
 };
 
-// funa essaawa mu nnamba
+/** 
+ * Funa essaawa mu nnamba
+ */
 funaEssaawaMuNnamba = (ess, end = 'm') => {
     // obuwanvu
     // '': SW:DKK:KTKTK
@@ -2052,7 +2106,9 @@ funaEssaawaMuNnamba = (ess, end = 'm') => {
     }
 };
 
-// funa kati
+/** 
+ * Funa kati
+ */
 funaMeka = (ess, eky) => {
     if (ess.essaawa > 23 || ess.essaawa < 0) {
         throw new Error('essaawa ezikilizibwa zilina okuva ku 0 paka 23');
@@ -2071,17 +2127,35 @@ funaMeka = (ess, eky) => {
     }
 };
 
-// funa ebyokwelobozesaako ebisuubilwa
+/** 
+ * Funa ebyokwelobozesaako ebisuubilwa
+ */
 funaEbyokwelobozesaakoEbisuubilwa = (ebyokwelobozesaako) => {
     return $.extend({}, $.ebiseelaNeEssaawa.ebyokwelobozesaako, ebyokwelobozesaako);
 };
 
-/* 
- * plugin methods
+/**
+ * ebyokwelobozesaako ebikilizibwa
  */
+$.ebiseelaNeEssaawa.ebyokwelobozesaako = {
+    endabika: 'm',
+    akagata: ''
+};
 
-/**** ennaku za omwezi ****/
+        /*
+ ****************** 
+ * PLUGIN METHODS *
+ ******************
+        */
 
+/**** Ebiseela ****/
+
+/**
+ * funa ennaku za omwezi leelo mundabika eza enjawulo okusinziila ku ebyokwelobozesaako
+ * date today
+ * @param {object} ebyokwelobozesaako ebyokwelobozesaako
+ * @return {string} ennaku za omwezi
+ */
 $.ebiseelaNeEssaawa.olwaleelo = (ebyokwelobozesaako) => {
 
     let obudde = new Date(),
@@ -2100,6 +2174,12 @@ $.ebiseelaNeEssaawa.olwaleelo = (ebyokwelobozesaako) => {
     }, ebyokwelobozesaako);
 };
 
+/**
+ * funa enzingu, olunaku, omwezi ne omwaka mundabika eza enjawulo okusinziila ku ebyokwelobozesaako
+ * day of the week, day of the month, month, year
+ * @param {object} budde enzingu, olunaku, omwezi ne omwaka
+ * @return {object} enzingu, olunaku, omwezi, omwaka
+ */
 $.ebiseelaNeEssaawa.obudde = (budde) => {
 
     // funa enzingu okuva mu biseela ebilala bweba teweleddwa
@@ -2114,6 +2194,13 @@ $.ebiseelaNeEssaawa.obudde = (budde) => {
     };
 };
 
+/**
+ * funa ennaku za omwezi mundabika eza enjawulo okusinziila ku ebyokwelobozesaako
+ * date
+ * @param {object} kiseela enzingu, olunaku, omwezi ne omwaka
+ * @param {object} ebyokwelobozesaako ebyokwelobozesaako
+ * @return {string} ennaku za omwezi
+ */
 $.ebiseelaNeEssaawa.ekiseela = (kiseela, ebyokwelobozesaako) => {
 
     ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
@@ -2126,33 +2213,73 @@ $.ebiseelaNeEssaawa.ekiseela = (kiseela, ebyokwelobozesaako) => {
     }, ebyokwelobozesaako);
 };
 
-$.ebiseelaNeEssaawa.omwezi = (mwezi, ebyokwelobozesaako) => {
-    ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
-    return funaOmwezi(mwezi, ebyokwelobozesaako.endabika);
-};
-
+/**
+ * funa enzingu okusinziila ku ebyokwelobozesaako
+ * day of the week
+ * @param {number} nzingu olunaku lwa wiiki. kuntandikila ku 0
+ * @param {object} ebyokwelobozesaako ebyokwelobozesaako
+ * @return {string} enzingu
+ */
 $.ebiseelaNeEssaawa.enzingu = (nzingu, ebyokwelobozesaako) => {
     ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
     return funaEnzingu(nzingu, ebyokwelobozesaako.endabika);
 };
 
+/**
+ * funa olunaku lwa omwezi okusinziila ku ebyokwelobozesaako
+ * day of the month
+ * @param {number} lunaku olunaku lwa omwezi
+ * @param {object} ebyokwelobozesaako ebyokwelobozesaako
+ * @return {string} olunaku
+ */
 $.ebiseelaNeEssaawa.olunaku = (lunaku, ebyokwelobozesaako) => {
     ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
     return funaOlunaku(lunaku, ebyokwelobozesaako.endabika);
 };
 
+/**
+ * funa omwezi okusinziila ku ebyokwelobozesaako
+ * month
+ * @param {number} mwezi omwezi. kutandikila ku 0
+ * @param {objct} ebyokwelobozesaako  ebyokwelobozesaako
+ * @return {string} omwezi
+ */
+$.ebiseelaNeEssaawa.omwezi = (mwezi, ebyokwelobozesaako) => {
+    ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
+    return funaOmwezi(mwezi, ebyokwelobozesaako.endabika);
+};
+
+/**
+ * funa olunaku olukulu mu mwaka
+ * public holiday
+ * @param {number} mwezi omwezi. kuntandikila ku 0
+ * @param {number} lunaku olunaku lwa omwezi
+ * @return {string} elinya lya olunaku
+ */
 $.ebiseelaNeEssaawa.olukulu = (mwezi, lunaku) => {
     return funaOlunakuOlukulu(mwezi, lunaku);
 };
 
-$.ebiseelaNeEssaawa.omwaka = (nnam, ebyokwelobozesaako) => {
+/**
+ * funa omwaka okusinziila ku ebyokwelobozesaako
+ * year
+ * @param {number} mwaka omwaka
+ * @param {object} ebyokwelobozesaako ebyokwelobozesaako 
+ * @return {string} omwaka
+ */
+$.ebiseelaNeEssaawa.omwaka = (mwaka, ebyokwelobozesaako) => {
     ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
-    return funaOmwaka(nnam, ebyokwelobozesaako.endabika);
+    return funaOmwaka(mwaka, ebyokwelobozesaako.endabika);
 };
 
-/**** essaawa ****/
+/**** Essaawa ****/
 
-// funna essawa kati
+/**
+ * funa essaawa meka kati okusinziila ku ebyokwelobozesaako
+ * current time
+ * @param {object} ebyokwelobozesaako ebyokwelobozesaako
+ * @return {string} essaawa meka
+ */
 $.ebiseelaNeEssaawa.kati = (ebyokwelobozesaako) => {
 
     ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
@@ -2169,7 +2296,13 @@ $.ebiseelaNeEssaawa.kati = (ebyokwelobozesaako) => {
     }, ebyokwelobozesaako);
 };
 
-// funna essawa kati
+/**
+ * funa essaawa meka okusinziila ku ebyokwelobozesaako
+ * time
+ * @param {object} saawa essaawa, eddakiika, akatikitiki 
+ * @param {object} ebyokwelobozesaako ebyokwelobozesaako
+ * @return {string} essaawa meka
+ */
 $.ebiseelaNeEssaawa.meka = (saawa, ebyokwelobozesaako) => {
 
     ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
@@ -2181,7 +2314,13 @@ $.ebiseelaNeEssaawa.meka = (saawa, ebyokwelobozesaako) => {
     }, ebyokwelobozesaako);
 };
 
-// funa essaawa
+/**
+ * funa essaawa zokka
+ * hour
+ * @param {number} saawa essaawa. 0-23
+ * @param {object} ebyokwelobozesaako ebyokwelobozesaako
+ * @return {string} essaawa
+ */
 $.ebiseelaNeEssaawa.essaawa = (saawa, ebyokwelobozesaako) => {
     ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
     if (ebyokwelobozesaako.endabika === E_SAWA.msz) {
@@ -2193,15 +2332,14 @@ $.ebiseelaNeEssaawa.essaawa = (saawa, ebyokwelobozesaako) => {
     }
 };
 
-// funa ekigelo kya essaawa
+/**
+ * funa ekigelo kya essaawa
+ * period of the day
+ * @param {number} saawa essaawa. 0-23
+ * @param {object} ebyokwelobozesaako ebyokwelobozesaako 
+ * @return {string} ekigelo
+ */
 $.ebiseelaNeEssaawa.ekigelo = (saawa, ebyokwelobozesaako) => {
     ebyokwelobozesaako = funaEbyokwelobozesaakoEbisuubilwa(ebyokwelobozesaako);
     return funaEkigelo(saawa, ebyokwelobozesaako.endabika);
-};
-
-// ebyokwelobozesaako ebikilizibwa
-$.ebiseelaNeEssaawa.ebyokwelobozesaako = {
-    endabika: 'm',
-    akagata: '',
-    akagambo: ''
 };
